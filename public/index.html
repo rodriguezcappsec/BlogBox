@@ -1,16 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="theme-color" content="#000000">
-    <!--
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!--
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
     -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-    <!--
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+  <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+
+  <!-- core plugins -->
+  <link rel="stylesheet" href="./assets/vendor/css/hamburgers.css">
+  <link rel="stylesheet" href="./assets/vendor/bower_components/perfect-scrollbar/css/perfect-scrollbar.min.css">
+  <link rel="stylesheet" href="./assets/vendor/bower_components/switchery/dist/switchery.min.css">
+
+  <link rel="stylesheet" href="./assets/vendor/bower_components/sweetalert/dist/sweetalert.css"><!-- site-wide styles -->
+  <link rel="stylesheet" href="./assets/vendor/css/bootstrap.css">
+
+  <link rel="stylesheet" href="./css/site.css"><!-- plugins for the current page -->
+  <link rel="stylesheet" href="./assets/vendor/bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="./assets/vendor/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600">
+  <script src="./assets/vendor/bower_components/breakpoints.js/dist/breakpoints.min.js"></script>
+
+  <script>Breakpoints({ xs: { min: 0, max: 575 }, sm: { min: 576, max: 767 }, md: { min: 768, max: 991 }, lg: { min: 992, max: 1199 }, xl: { min: 1200, max: Infinity } });</script>
+  <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
@@ -19,22 +35,38 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>
-      You need to enable JavaScript to run this app.
-    </noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+  <title>BlogBox</title>
+</head>
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+<body class="menubar-top menubar-dark dashboard dashboard-v1">
+  <noscript>
+    You need to enable JavaScript to run this app.
+  </noscript>
+  <div id="root">
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
+
+  </div>
+
+  <!-- core plugins -->
+  <script src="./assets/vendor/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="./assets/vendor/bower_components/popper.js/dist/umd/popper.min.js"></script>
+  <script src="./assets/vendor/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="./assets/vendor/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+  <script src="./assets/vendor/bower_components/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js"></script>
+  <script src="./assets/vendor/bower_components/switchery/dist/switchery.min.js"></script>
+  <script src="./assets/vendor/bower_components/waypoints/lib/jquery.waypoints.min.js"></script>
+  <script src="./assets/vendor/bower_components/waypoints/lib/shortcuts/sticky.min.js"></script>
+  <script src="./assets/vendor/bower_components/counterup/jquery.counterup.min.js"></script>
+  <script src="./assets/vendor/js/jquery.sparkline.min.js"></script>
+  <script src="./assets/global/js/plugins/dropdown-caret.js"></script>
+  <script src="./assets/global/js/plugins/firstlitter.js"></script>
+
+  <script src="./assets/global/js/main.js"></script>
+  <script src="js/site.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/menubar.js"></script><!-- current page scripts -->
+  <script src="./assets/examples/js/dashboards/dashboard.v1.js"></script>
+
+</body>
+
 </html>
