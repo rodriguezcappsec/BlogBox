@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import "./App.css";
 import NavBar from "./components/MainPage/NavBar";
 import Header from "./components/MainPage/Header";
 import Main from "./components//MainPage/Main";
+import { GraphQLSchema } from "graphql";
 class App extends Component {
   //state here
   render() {
@@ -10,7 +10,9 @@ class App extends Component {
       <React.Fragment>
         <NavBar />
         <Header />
-        <Main />
+
+        {/* <SubHeader /> */}
+        <Main>{/* Main Content Here */}</Main>
       </React.Fragment>
     );
   }

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Header from "./Header";
 export default class MainPage extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +13,7 @@ export default class MainPage extends Component {
               <span className="brand-name hidden-fold">BlogBox</span>{" "}
             </a>
             {/* <a
-              href="javascript:void(0)"
+               href=""
               className="hidden-md-down"
               data-toggle="dropdown"
               aria-haspopup="true"
@@ -81,7 +80,7 @@ export default class MainPage extends Component {
               <li className="nav-item dropdown">
                 <a
                   className="nav-link dropdown-toggle"
-                  href="#"
+                   href=""
                   data-toggle="dropdown"
                   aria-haspopup="true"
                   aria-expanded="false"
@@ -97,13 +96,13 @@ export default class MainPage extends Component {
                     <span className="mr-auto my-1">
                       You Have 4 Unread Notifications
                     </span>{" "}
-                    <a href="#" className="btn btn-sm btn-light my-1">
+                    <a  href="" className="btn btn-sm btn-light my-1">
                       See all
                     </a>
                   </div>
                   <div className="scroll-container">
                     <a
-                      href="javascript:void(0)"
+                       href=""
                       className="media dropdown-item"
                     >
                       <span
@@ -121,7 +120,7 @@ export default class MainPage extends Component {
                       </div>
                     </a>
                     <a
-                      href="javascript:void(0)"
+                       href=""
                       className="media dropdown-item"
                     >
                       <span
@@ -139,7 +138,7 @@ export default class MainPage extends Component {
                       </div>
                     </a>
                     <a
-                      href="javascript:void(0)"
+                       href=""
                       className="media dropdown-item"
                     >
                       <span
@@ -157,7 +156,7 @@ export default class MainPage extends Component {
                       </div>
                     </a>
                     <a
-                      href="javascript:void(0)"
+                       href=""
                       className="media dropdown-item"
                     >
                       <span
@@ -182,7 +181,7 @@ export default class MainPage extends Component {
               <li className="nav-item dropdown">
                 <a
                   className="nav-link dropdown-toggle"
-                  href="#"
+                   href=""
                   data-toggle="dropdown"
                   aria-haspopup="true"
                   aria-expanded="false"
@@ -198,17 +197,17 @@ export default class MainPage extends Component {
                     <span className="mr-auto my-1">
                       You Have 3 Unread Messages
                     </span>
-                    <a href="#" className="btn btn-sm btn-light my-1">
+                    <a  href="" className="btn btn-sm btn-light my-1">
                       See all
                     </a>
                   </div>
                   <div className="scroll-container">
                     <a
-                      href="javascript:void(0)"
+                       href=""
                       className="media dropdown-item"
                     >
                       <div className="avatar">
-                        <img src="../assets/global/images/203.jpg" alt />{" "}
+                        <img src="../assets/global/images/203.jpg"  alt="true" />{" "}
                         <span className="badge badge-success">5</span>
                       </div>
                       <div className="media-body">
@@ -219,11 +218,11 @@ export default class MainPage extends Component {
                       </div>
                     </a>
                     <a
-                      href="javascript:void(0)"
+                       href=""
                       className="media dropdown-item"
                     >
                       <div className="avatar">
-                        <img src="../assets/global/images/101.jpg" alt />{" "}
+                        <img src="../assets/global/images/101.jpg"  alt="true" />{" "}
                         <span className="badge badge-success">9</span>
                       </div>
                       <div className="media-body">
@@ -234,11 +233,11 @@ export default class MainPage extends Component {
                       </div>
                     </a>
                     <a
-                      href="javascript:void(0)"
+                       href=""
                       className="media dropdown-item"
                     >
                       <div className="avatar">
-                        <img src="../assets/global/images/202.jpg" alt />{" "}
+                        <img src="../assets/global/images/202.jpg"  alt="true" />{" "}
                         <span className="badge badge-success">1</span>
                       </div>
                       <div className="media-body">
@@ -256,7 +255,7 @@ export default class MainPage extends Component {
               <li className="nav-item dropdown">
                 <a
                   className="nav-link dropdown-toggle"
-                  href="#"
+                   href=""
                   data-toggle="dropdown"
                   aria-haspopup="true"
                   aria-expanded="false"
@@ -264,34 +263,34 @@ export default class MainPage extends Component {
                   <img
                     className="nav-img"
                     src="../assets/global/images/flags/United-States-of-America.png"
-                    alt
+                     alt="true"
                   />{" "}
                   <span className="nav-text hidden-sm-down ml-2">English</span>{" "}
                   <i className="nav-caret hidden-sm-down zmdi zmdi-hc-sm zmdi-chevron-down" />
                 </a>
                 <div className="dropdown-menu p-0" data-plugin="dropdownCaret">
                   <a className="dropdown-item dropdown-menu-cap">4 Languages</a>{" "}
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item"  href="">
                     <img
                       src="../assets/global/images/flags/Egypt.png"
                       className="mr-3 dropdown-item-icon"
-                      alt
+                       alt="true"
                     />{" "}
                     <span>Arabic</span>{" "}
                   </a>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item"  href="">
                     <img
                       src="../assets/global/images/flags/United-States-of-America.png"
                       className="mr-3 dropdown-item-icon"
-                      alt
+                       alt="true"
                     />{" "}
                     <span>English</span>{" "}
                   </a>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item"  href="">
                     <img
                       src="../assets/global/images/flags/Spain.png"
                       className="mr-3 dropdown-item-icon"
-                      alt
+                       alt="true"
                     />{" "}
                     <span>Spanish</span>
                   </a>
@@ -300,7 +299,7 @@ export default class MainPage extends Component {
               <li className="nav-item dropdown mega-dropdown">
                 <a
                   className="nav-link dropdown-toggle"
-                  href="#"
+                   href=""
                   data-toggle="dropdown"
                   aria-haspopup="true"
                   aria-expanded="false"
@@ -314,22 +313,22 @@ export default class MainPage extends Component {
                       <div className="mega-menu-section">
                         <h6 className="mb-3">Featured Courses</h6>
                         <div className="mega-links-list">
-                          <a href="#">Bootstrap</a> <a href="#">SASS Basics</a>{" "}
-                          <a href="#">HTML &amp; CSS</a>{" "}
-                          <a href="#">PHP For Beginners</a>{" "}
-                          <a href="#">SASS Best Practices</a>{" "}
-                          <a href="#">Javascript Intermediate</a>
+                          <a  href="">Bootstrap</a> <a  href="">SASS Basics</a>{" "}
+                          <a  href="">HTML &amp; CSS</a>{" "}
+                          <a  href="">PHP For Beginners</a>{" "}
+                          <a  href="">SASS Best Practices</a>{" "}
+                          <a  href="">Javascript Intermediate</a>
                         </div>
                       </div>
                       {/* /.mega-menu-section */}
                       <div className="mega-menu-section">
                         <div className="g__item mb-3">
                           <figure className="g__figure">
-                            <a href="#">
+                            <a  href="">
                               <img
                                 className="img-fluid"
                                 src="https://themes.tielabs.com/sahifa/wp-content/uploads/sites/3/2015/01/1806717289_6e97fe91c9_b-660x330.jpg"
-                                alt
+                                 alt="true"
                               />
                             </a>
                             <figcaption className="g__overlay">
@@ -348,10 +347,10 @@ export default class MainPage extends Component {
                           <div className="media mb-3">
                             <div className="g__item mr-3 mb-0">
                               <figure className="g__figure">
-                                <a href="#">
+                                <a  href="">
                                   <img
                                     src="../assets/global/images/blog-img-11.jpg"
-                                    alt
+                                     alt="true"
                                   />
                                 </a>
                                 <figcaption className="g__overlay">
@@ -361,7 +360,7 @@ export default class MainPage extends Component {
                             </div>
                             <div className="media-body">
                               <h6 className="media-heading">
-                                <a href="#">Your Guide To PHP</a>
+                                <a  href="">Your Guide To PHP</a>
                               </h6>
                               <span>This is an excerpt</span>
                               <span>
@@ -373,10 +372,10 @@ export default class MainPage extends Component {
                           <div className="media mb-3">
                             <div className="g__item mr-3 mb-0">
                               <figure className="g__figure">
-                                <a href="#">
+                                <a  href="">
                                   <img
                                     src="../assets/global/images/blog-img-12.jpg"
-                                    alt
+                                     alt="true"
                                   />
                                 </a>
                                 <figcaption className="g__overlay">
@@ -386,7 +385,7 @@ export default class MainPage extends Component {
                             </div>
                             <div className="media-body">
                               <h6 className="media-heading">
-                                <a href="#">Javascript Weird Parts</a>
+                                <a  href="">Javascript Weird Parts</a>
                               </h6>
                               <span>This is an excerpt of the post</span>{" "}
                               <span>
@@ -398,10 +397,10 @@ export default class MainPage extends Component {
                           <div className="media">
                             <div className="g__item mr-3 mb-0">
                               <figure className="g__figure">
-                                <a href="#">
+                                <a  href="">
                                   <img
                                     src="../assets/global/images/blog-img-13.jpg"
-                                    alt
+                                     alt="true"
                                   />
                                 </a>
                                 <figcaption className="g__overlay">
@@ -411,7 +410,7 @@ export default class MainPage extends Component {
                             </div>
                             <div className="media-body">
                               <h6 className="media-heading">
-                                <a href="#">Bootstrap 4 Is Here</a>
+                                <a  href="">Bootstrap 4 Is Here</a>
                               </h6>
                               <span>This is an excerpt of the post</span>{" "}
                               <span>
@@ -464,14 +463,14 @@ export default class MainPage extends Component {
                 id="navbar-search-toggler"
                 className="nav-item hidden-xl-up hidden-sm-down"
               >
-                <a className="nav-link" href="#" data-toggle="navbar-search">
+                <a className="nav-link"  href="" data-toggle="navbar-search">
                   <span className="zmdi zmdi-hc-lg zmdi-search" />
                 </a>
               </li>
               <li className="nav-item dropdown">
                 <a
                   className="nav-link site-user dropdown-toggle"
-                  href="#"
+                   href=""
                   data-toggle="dropdown"
                   aria-haspopup="true"
                   aria-expanded="false"
@@ -479,7 +478,7 @@ export default class MainPage extends Component {
                   <img
                     className="nav-img"
                     src="../assets/global/images/user-img.png"
-                    alt
+                     alt="true"
                   />{" "}
                   <span className="nav-text hidden-sm-down ml-2">Daniel</span>{" "}
                   <i className="nav-caret hidden-sm-down zmdi zmdi-hc-sm zmdi-chevron-down" />
@@ -491,35 +490,25 @@ export default class MainPage extends Component {
                   <a className="dropdown-item dropdown-menu-cap">
                     Daniel Alexander
                   </a>{" "}
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item"  href="">
                     <i className="fa fa-user-o mr-3" /> <span>My Profile</span>
                   </a>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item"  href="">
                     <i className="fa fa-list-ul mr-3" /> <span>My Tasks</span>{" "}
                   </a>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item"  href="">
                     <i className="fa fa-envelope-o mr-3" />{" "}
                     <span>My Inbox</span>
                   </a>
                   <div className="dropdown-divider" />
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item"  href="">
                     <i className="fa fa-file-o mr-3" />
                     <span>Lock Screen</span>{" "}
                   </a>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item"  href="">
                     <i className="fa fa-power-off mr-3" /> <span>Logout</span>
                   </a>
                 </div>
-              </li>
-              <li className="nav-item">
-                <a
-                  className="nav-link"
-                  href="#side-panel"
-                  data-toggle="class"
-                  data-class="open"
-                >
-                  <i className="zmdi zmdi-menu zmdi-hc-lg" />
-                </a>
               </li>
             </ul>
             {/* /.navbar-nav */}
