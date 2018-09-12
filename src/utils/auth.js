@@ -1,18 +1,8 @@
 import Axios from "axios";
 import swal from "sweetalert2";
+import authUrls from "./endPoints";
 
-let apiUrl = "";
-window.location.hostname === "localhost"
-  ? (apiUrl = "http://localhost:4741")
-  : (apiUrl = "BACKEND DEPLOYMENT END POINT HERE");
-
-let authEndPoints = {
-  logIn: apiUrl + "/sign-in",
-  changePassword: apiUrl + "/change-password",
-  register: apiUrl + "/sign-up",
-  logOut: apiUrl + "/sign-out"
-};
-
+//Authentication class
 class Authenticate {
   constructor(email, password, password_confirmation = "", userName = "") {
     this.credentials = {
@@ -33,15 +23,13 @@ class Authenticate {
     };
   }
   async logIn() {
-    let helper = await Axios.post(
-      authEndPoints.logIn,
-      this.credentials.login
-    ).catch(() =>
-      swal({
-        type: "error",
-        title: "Oops...",
-        text: "Login failed please try again"
-      })
+    let helper = await Axios.post(authUrls.logIn, this.credentials.login).catch(
+      () =>
+        swal({
+          type: "error",
+          title: "Oops...",
+          text: "Login failed please try again"
+        })
     );
     if (helper) {
       swal({
@@ -58,7 +46,7 @@ class Authenticate {
   }
   async register() {
     let helper = await Axios.post(
-      authEndPoints.register,
+      authUrls.register,
       this.credentials.register
     ).catch(() =>
       swal({
@@ -78,6 +66,7 @@ class Authenticate {
   }
 }
 
+//object export **add a new key for each export**
 export default {
   Authentication: Authenticate
 };
