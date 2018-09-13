@@ -2,21 +2,20 @@ import React, { Component } from "react";
 import NavBar from "./components/MainPage/NavBar";
 import Header from "./components/MainPage/Header";
 import Main from "./components//MainPage/Main";
-import utilities from "./utils/authApi";
-import logInAlert from "./utils/validationAlerts";
-import swal from "sweetalert2";
+import Authenticate from "./utils/authApi";
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userToken: ""
+      user: ""
     };
   }
   async componentDidMount() {
     //testing authentication
-    let test = new utilities.Authentication("testing@test.com", "111");
+    let test = new Authenticate({ email: "test@test.com", password: "11" });
     let data = await test.logIn();
-    this.setState({ userToken: data.token });
+    this.setState({ user: data });
+    console.log(this.state.user);
   }
   render() {
     return (
