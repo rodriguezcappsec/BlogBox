@@ -1,6 +1,7 @@
 import Axios from "axios";
 import swal from "sweetalert2";
 import endPoints from "./endPoints";
+require("dotenv");
 //Authentication class
 class Authenticate {
   constructor(authenticate = {}) {
@@ -35,15 +36,15 @@ class Authenticate {
     };
   }
   logIn = async () => {
-    let helper = await Axios.post(endPoints.authUrls.logIn, this.credentials.login).catch(
-      () =>
-        swal({
-          background:
-            "rgba(0,0,0,0) linear-gradient(#444,#111) repeat scroll 0 0",
-          type: "error",
-          title: "Oops...",
-          text: "Login failed please try again"
-        })
+    let helper = await Axios.post(
+      endPoints.authUrls.logIn,
+      this.credentials.login
+    ).catch(() =>
+      swal({
+        type: "error",
+        title: "Oops...",
+        text: "Login failed please try again"
+      })
     );
     if (helper) {
       swal({
@@ -54,6 +55,7 @@ class Authenticate {
         showConfirmButton: false,
         timer: 3000
       });
+      localStorage.setItem(process.env.MY_TOKEN_KEY, helper.data.user.token);
       return helper.data.user;
     }
   };
