@@ -1,46 +1,45 @@
 import Axios from "axios";
 import swal from "sweetalert2";
-import authUrls from "./endPoints";
+import endPoints from "./endPoints";
 //Authentication class
 class Authenticate {
-  constructor(
-    email,
-    password,
-    password_confirmation = "",
-    userName = "",
-    changePassword = {},
-    token
-  ) {
+  constructor(authenticate = {}) {
     this.credentials = {
-      login: { credentials: { email: email, password: password } },
+      login: {
+        credentials: {
+          email: authenticate.email || "",
+          password: authenticate.password || ""
+        }
+      },
       register: {
         credentials: {
-          userName: userName,
-          email: email,
-          password: password,
-          password_confirmation: password_confirmation
+          userName: authenticate.userName || "",
+          email: authenticate.email || "",
+          password: authenticate.password || "",
+          password_confirmation: authenticate.password_confirmation || ""
         }
       },
       changePassword: {
-        token: {
-          headers: {
-            Authorization: "Bearer " + token
-          }
-        },
         passwords: {
           passwords: {
-            old: changePassword.old,
-            new: changePassword.new
+            old: authenticate.old || "",
+            new: authenticate.new || ""
           }
         }
       }
     };
-    this.logOut = token;
+    this.token = {
+      token: {
+        headers: { Authorization: "Bearer " + authenticate.token || "" }
+      }
+    };
   }
   logIn = async () => {
-    let helper = await Axios.post(authUrls.logIn, this.credentials.login).catch(
+    let helper = await Axios.post(endPoints.authUrls.logIn, this.credentials.login).catch(
       () =>
         swal({
+          background:
+            "rgba(0,0,0,0) linear-gradient(#444,#111) repeat scroll 0 0",
           type: "error",
           title: "Oops...",
           text: "Login failed please try again"
@@ -49,7 +48,7 @@ class Authenticate {
     if (helper) {
       swal({
         type: "success",
-        title: "Signed in successfull",
+        title: "Signed in successfully",
         toast: true,
         position: "bottom-end",
         showConfirmButton: false,
@@ -60,7 +59,7 @@ class Authenticate {
   };
   register = async () => {
     let helper = await Axios.post(
-      authUrls.register,
+      endPoints.authUrls.register,
       this.credentials.register
     ).catch(() =>
       swal({
@@ -73,16 +72,16 @@ class Authenticate {
       swal({
         type: "success",
         title: "Great!!!",
-        text: "Account successfuly created!"
+        text: "Account successfully created!"
       });
       return helper.data.user;
     }
   };
   changePassword = async () => {
     let helper = await Axios.patch(
-      authUrls.changePassword,
+      endPoints.authUrls.changePassword,
       this.credentials.changePassword.passwords,
-      this.credentials.changePassword.token
+      this.token
     ).catch(err => {
       swal({
         type: "error",
@@ -94,13 +93,13 @@ class Authenticate {
       swal({
         type: "success",
         title: "Great!!!",
-        text: "Account successfuly created!"
+        text: "Account successfully created!"
       });
       return helper.data.user;
     }
   };
   logOut = async () => {
-    await Axios.delete(authUrls.logOut, this.logOut).catch(err => {
+    await Axios.delete(endPoints.authUrls.logOut, this.token).catch(err => {
       swal({
         type: "error",
         title: "Oops...Error trying to log out",
@@ -110,6 +109,4 @@ class Authenticate {
   };
 }
 
-export default {
-  Authentication: Authenticate
-};
+export default Authenticate;

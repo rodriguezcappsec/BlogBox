@@ -12,4 +12,9 @@ let authUrls = {
   logOut: apiUrl + "/sign-out"
 };
 
-export default authUrls;
+let blogEndPoint = {
+  blog: apiUrl + "/api/blogs"
+};
+
+let commetEndPoint;
+export default { authUrls, blogEndPoint };
