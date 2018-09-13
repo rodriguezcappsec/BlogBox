@@ -16,5 +16,6 @@ let blogEndPoint = {
   blog: apiUrl + "/api/blogs"
 };
 
-let commetEndPoint;
+
+
 export default { authUrls, blogEndPoint };
