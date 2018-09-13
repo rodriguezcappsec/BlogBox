@@ -1,5 +1,4 @@
 //condition to set the api url
-
 let apiUrl = "";
 window.location.hostname === "localhost"
   ? (apiUrl = "http://localhost:4741")
