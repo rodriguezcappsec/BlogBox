@@ -12,14 +12,13 @@ let post = (url, data) => {
 };
 
 let get = (url, id) => {
-  console.log(id);
   let _token =
     id === undefined ? "" : { headers: { Authorization: "Bearer " + token() } };
   return Axios.get(`${url}/${id}`, _token);
 };
 
 let update = (url, id, data) => {
-  return Axios.patch(`${url}/${id}`, data, {
+  return Axios.patch(`${url}/${id}`, Object.keys(data).length < 1 ? "" : data, {
     headers: {
       Authorization: "Bearer " + token()
     }

@@ -4,13 +4,13 @@ import endPoints from "./endPoints";
 
 const commentService = {
   find: async id => {
-    let blogID = id === undefined ? "" : id;
+    let favoriteID = id === undefined ? "" : id;
     let helper = await verbs
-      .get(endPoints.commentEndPoint, blogID)
+      .get(endPoints.favoriteEndPoint, favoriteID)
       .catch(err => {
         swal({
           type: "error",
-          title: blogID === "" ? "could not get blogs" : "could not get blog",
+          title: "could not get saved blogs",
           toast: true,
           position: "top-end",
           showConfirmButton: false,
@@ -19,52 +19,31 @@ const commentService = {
       });
     if (helper) {
       if (id === undefined) {
-        return helper.data.blogs;
+        return helper.data.favorites;
       } else {
-        return helper.data.blog;
+        return helper.data.favorite;
       }
     }
   },
-  create: async (body = { blog: {} }) => {
-    let helper = await verbs.post(endPoints.commentEndPoint, body).catch(() => {
-      swal({
-        type: "error",
-        title: "could not create blog",
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 3000
-      });
-    });
-    if (helper) {
-      swal({
-        type: "success",
-        title: "Blog created successfully!",
-        toast: true,
-        position: "top-left",
-        showConfirmButton: false,
-        timer: 3000
-      });
-      return helper.data.blog;
-    }
-  },
-  update: async (id, body = { blog: {} }) => {
+  //leave favorite={} empty, it will construct what it needs in the backend
+  create: async (blogID, body = { favorite: {} }) => {
     let helper = await verbs
-      .update(endPoints.commentEndPoint, id, body)
-      .catch(() => {
+      .post(`${endPoints.favoriteEndPoint}/${blogID}`, body)
+      .catch(err => {
         swal({
           type: "error",
-          title: "could not update blog",
+          title: err.response.data,
           toast: true,
           position: "top-end",
-          showConfirmButton: false,
-          timer: 3000
+          showConfirmButton: true,
+          footer:
+            "<a href='https://httpstatuses.com/409' target='_blank'>Why do I have this issue?</a>"
         });
       });
     if (helper) {
       swal({
         type: "success",
-        title: "Blog updated successfully!",
+        title: "Blog Saved!",
         toast: true,
         position: "top-left",
         showConfirmButton: false,
@@ -73,7 +52,8 @@ const commentService = {
       return helper.data.blog;
     }
   },
-  delete: id => {
+  //Pass in the id of the blog to be removed
+  delete: blogID => {
     swal({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -85,11 +65,11 @@ const commentService = {
     }).then(async result => {
       if (result.value) {
         let helper = await verbs
-          .del(endPoints.commentEndPoint, id)
+          .update(`${endPoints.favoriteEndPoint}`, `${blogID}`, {})
           .catch(() => {
             swal({
               type: "error",
-              title: "could not delete blog",
+              title: "could not remove blog from favorites",
               toast: true,
               position: "top-end",
               showConfirmButton: false,
@@ -100,7 +80,7 @@ const commentService = {
         if (helper) {
           swal({
             type: "success",
-            title: "Blog deleted successfully!",
+            title: "Blog removed from favorites!",
             toast: true,
             position: "top-left",
             showConfirmButton: false,

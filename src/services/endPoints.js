@@ -14,5 +14,6 @@ let authUrls = {
 
 let blogEndPoint = apiUrl + "/api/blogs";
 let commentEndPoint = apiUrl + "/api/comments";
+let favoriteEndPoint = apiUrl + "/api/favorites";
 
-export default { authUrls, blogEndPoint, commentEndPoint };
+export default { authUrls, blogEndPoint, commentEndPoint, favoriteEndPoint };
