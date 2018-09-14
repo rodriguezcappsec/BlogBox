@@ -30,8 +30,9 @@ class Authenticate {
       }
     };
     this.token = {
-      token: {
-        headers: { Authorization: "Bearer " + authenticate.token || "" }
+      headers: {
+        Authorization:
+          "Bearer " + localStorage.getItem(process.env.MY_TOKEN_KEY) || ""
       }
     };
   }
@@ -47,6 +48,7 @@ class Authenticate {
       })
     );
     if (helper) {
+      localStorage.setItem(process.env.MY_TOKEN_KEY, helper.data.user.token);
       swal({
         type: "success",
         title: "Signed in successfully",
@@ -55,7 +57,6 @@ class Authenticate {
         showConfirmButton: false,
         timer: 3000
       });
-      localStorage.setItem(process.env.MY_TOKEN_KEY, helper.data.user.token);
       return helper.data.user;
     }
   };
