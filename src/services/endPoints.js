@@ -12,10 +12,8 @@ let authUrls = {
   logOut: apiUrl + "/sign-out"
 };
 
-let blogEndPoint = {
-  blog: apiUrl + "/api/blogs"
-};
+let blogEndPoint = apiUrl + "/api/blogs";
+let commentEndPoint = apiUrl + "/api/comments";
+let favoriteEndPoint = apiUrl + "/api/favorites";
 
-
-
-export default { authUrls, blogEndPoint };
+export default { authUrls, blogEndPoint, commentEndPoint, favoriteEndPoint };
