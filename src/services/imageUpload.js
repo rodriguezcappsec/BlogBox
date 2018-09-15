@@ -1,5 +1,4 @@
 import Axios from "axios";
-import Cloudinary from "cloudinary";
 const imageUpload = async file => {
   const formData = new FormData();
   formData.append("file", file);
