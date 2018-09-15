@@ -1,7 +1,7 @@
 import Axios from "axios";
 import swal from "sweetalert2";
 import endPoints from "./endPoints";
-require("dotenv");
+// require("dotenv").config()
 //Authentication class
 class Authenticate {
   constructor(authenticate = {}) {
@@ -48,7 +48,10 @@ class Authenticate {
       })
     );
     if (helper) {
-      localStorage.setItem(process.env.MY_TOKEN_KEY, helper.data.user.token);
+      localStorage.setItem(
+        process.env.REACT_APP_MY_TOKEN_KEY,
+        helper.data.user.token
+      );
       swal({
         type: "success",
         title: "Signed in successfully",
@@ -102,13 +105,19 @@ class Authenticate {
     }
   };
   logOut = async () => {
-    await Axios.delete(endPoints.authUrls.logOut, this.token).catch(err => {
+    let helper = await Axios.delete(
+      endPoints.authUrls.logOut,
+      this.token
+    ).catch(err => {
       swal({
         type: "error",
         title: "Oops...Error trying to log out",
         text: "Please try again"
       });
     });
+    if (helper) {
+      localStorage.removeItem(process.env.REACT_APP_MY_TOKEN_KEY);
+    }
   };
 }
 

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { Link } from "react-router-dom";
 export default class Header extends Component {
   render() {
     return (
@@ -7,11 +7,11 @@ export default class Header extends Component {
         <header className="site-header">
           <div className="breadcrumb">
             <ol className="breadcrumb-tree">
-              <li className="breadcrumb-item">
+              <Link to="/" className="breadcrumb-item">
                 <a href="">
                   <span className="zmdi zmdi-home mr-1" /> <span>Home</span>
                 </a>
-              </li>
+              </Link>
             </ol>
             <ul className="breadcrumb-btns">
               <li className="dropdown">
