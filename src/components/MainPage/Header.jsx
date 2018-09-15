@@ -8,9 +8,7 @@ export default class Header extends Component {
           <div className="breadcrumb">
             <ol className="breadcrumb-tree">
               <Link to="/" className="breadcrumb-item">
-                <a href="">
-                  <span className="zmdi zmdi-home mr-1" /> <span>Home</span>
-                </a>
+                <span className="zmdi zmdi-home mr-1" /> <span>Home</span>
               </Link>
             </ol>
             <ul className="breadcrumb-btns">

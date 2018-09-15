@@ -32,7 +32,8 @@ class Authenticate {
     this.token = {
       headers: {
         Authorization:
-          "Bearer " + localStorage.getItem(process.env.MY_TOKEN_KEY) || ""
+          "Bearer " +
+            localStorage.getItem(process.env.REACT_APP_MY_TOKEN_KEY) || ""
       }
     };
   }

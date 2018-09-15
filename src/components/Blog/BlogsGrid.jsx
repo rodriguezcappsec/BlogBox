@@ -3,15 +3,7 @@ import { Link } from "react-router-dom";
 import Slide from "@material-ui/core/Slide";
 
 export default class BlogsGrid extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      loged: this.getLocalStorage() ? true : false
-    };
-  }
-  getLocalStorage = () => {
-    return localStorage.getItem(process.env.REACT_APP_MY_TOKEN_KEY);
-  };
+
   render() {
     return (
       <React.Fragment>
@@ -22,8 +14,7 @@ export default class BlogsGrid extends Component {
                 in={true}
                 direction={index % 2 === 0 ? "right" : "left"}
                 style={{ transformOrigin: "0 0 0" }}
-                    {...(index % 2 === 0 ? { timeout: 500 } : { timeout: 500 })}
-                    
+                {...(index % 2 === 0 ? { timeout: 500 } : { timeout: 500 })}
                 key={index}
               >
                 <div className="col-lg-4" key={index}>
@@ -61,7 +52,7 @@ export default class BlogsGrid extends Component {
                       </div>
                       <hr />
                       <div className="d-flex">
-                        {this.state.loged ? (
+                                    {this.props.loged ? (
                           <div className="mr-auto">
                             <button className="btn btn-icon btn-lg circle mr-1 bg-faded text-gray">
                               <i className="fa fa-thumbs-up" />
@@ -77,7 +68,7 @@ export default class BlogsGrid extends Component {
                           </button>{" "}
                           <span>{blog.comments.length}</span>
                         </div>
-                        {this.state.loged ? (
+                                    {this.props.loged ? (
                           <div className="ml-4">
                             <button className="btn btn-icon btn-lg circle mr-1 bg-faded text-gray">
                               <i className="fa fa-plus" />
