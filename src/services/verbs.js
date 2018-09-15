@@ -1,7 +1,7 @@
 import Axios from "axios";
-require("dotenv");
+// require("dotenv").config();
 
-const token = () => localStorage.getItem(process.env.MY_TOKEN_KEY);
+const token = () => localStorage.getItem(process.env.REACT_APP_MY_TOKEN_KEY);
 
 let post = (url, data) => {
   return Axios.post(url, data, {
@@ -12,11 +12,12 @@ let post = (url, data) => {
 };
 
 let get = (url, id) => {
-  let _token =
-    id === undefined ? "" : { headers: { Authorization: "Bearer " + token() } };
-  return Axios.get(`${url}/${id}`, _token);
+  // let _token =
+  //   id === undefined ? "" : { headers: { Authorization: "Bearer " + token() } };
+  return Axios.get(`${url}/${id}`);
 };
 
+//If for some reason you don't need data to update, pass in an empty {}
 let update = (url, id, data) => {
   return Axios.patch(`${url}/${id}`, Object.keys(data).length < 1 ? "" : data, {
     headers: {

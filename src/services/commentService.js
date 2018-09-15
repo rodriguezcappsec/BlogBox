@@ -10,7 +10,10 @@ const commentService = {
       .catch(err => {
         swal({
           type: "error",
-          title: commentID === "" ? "could not get comments" : "could not get comment",
+          title:
+            commentID === ""
+              ? "could not get comments"
+              : "could not get comment",
           toast: true,
           position: "top-end",
           showConfirmButton: false,

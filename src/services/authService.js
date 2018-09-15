@@ -1,7 +1,7 @@
 import Axios from "axios";
 import swal from "sweetalert2";
 import endPoints from "./endPoints";
-require("dotenv");
+// require("dotenv").config()
 //Authentication class
 class Authenticate {
   constructor(authenticate = {}) {
@@ -48,7 +48,7 @@ class Authenticate {
       })
     );
     if (helper) {
-      localStorage.setItem(process.env.MY_TOKEN_KEY, helper.data.user.token);
+      localStorage.setItem(process.env.REACT_APP_MY_TOKEN_KEY, helper.data.user.token);
       swal({
         type: "success",
         title: "Signed in successfully",
