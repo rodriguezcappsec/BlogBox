@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 export default class MainPage extends Component {
   constructor(props) {
     super(props);
@@ -9,9 +10,9 @@ export default class MainPage extends Component {
       <React.Fragment>
         <nav className="site-navbar navbar fixed-top navbar-expand-lg navbar-dark bg-blue">
           <div className="navbar-header">
-            <a className="navbar-brand" href="">
+            <Link to="/" className="navbar-brand" href="">
               <span className="brand-name hidden-fold">BlogBox</span>{" "}
-            </a>
+            </Link>
             {/* <a
                href=""
               className="hidden-md-down"
@@ -80,7 +81,7 @@ export default class MainPage extends Component {
               <li className="nav-item dropdown">
                 <a
                   className="nav-link dropdown-toggle"
-                   href=""
+                  href=""
                   data-toggle="dropdown"
                   aria-haspopup="true"
                   aria-expanded="false"
@@ -96,15 +97,12 @@ export default class MainPage extends Component {
                     <span className="mr-auto my-1">
                       You Have 4 Unread Notifications
                     </span>{" "}
-                    <a  href="" className="btn btn-sm btn-light my-1">
+                    <a href="" className="btn btn-sm btn-light my-1">
                       See all
                     </a>
                   </div>
                   <div className="scroll-container">
-                    <a
-                       href=""
-                      className="media dropdown-item"
-                    >
+                    <a href="" className="media dropdown-item">
                       <span
                         className="avatar bg-success"
                         data-plugin="firstLitter"
@@ -119,10 +117,7 @@ export default class MainPage extends Component {
                         </small>
                       </div>
                     </a>
-                    <a
-                       href=""
-                      className="media dropdown-item"
-                    >
+                    <a href="" className="media dropdown-item">
                       <span
                         className="avatar bg-warning"
                         data-plugin="firstLitter"
@@ -137,10 +132,7 @@ export default class MainPage extends Component {
                         </small>
                       </div>
                     </a>
-                    <a
-                       href=""
-                      className="media dropdown-item"
-                    >
+                    <a href="" className="media dropdown-item">
                       <span
                         className="avatar bg-primary"
                         data-plugin="firstLitter"
@@ -155,10 +147,7 @@ export default class MainPage extends Component {
                         </small>
                       </div>
                     </a>
-                    <a
-                       href=""
-                      className="media dropdown-item"
-                    >
+                    <a href="" className="media dropdown-item">
                       <span
                         className="avatar bg-danger"
                         data-plugin="firstLitter"
@@ -181,7 +170,7 @@ export default class MainPage extends Component {
               <li className="nav-item dropdown">
                 <a
                   className="nav-link dropdown-toggle"
-                   href=""
+                  href=""
                   data-toggle="dropdown"
                   aria-haspopup="true"
                   aria-expanded="false"
@@ -197,17 +186,14 @@ export default class MainPage extends Component {
                     <span className="mr-auto my-1">
                       You Have 3 Unread Messages
                     </span>
-                    <a  href="" className="btn btn-sm btn-light my-1">
+                    <a href="" className="btn btn-sm btn-light my-1">
                       See all
                     </a>
                   </div>
                   <div className="scroll-container">
-                    <a
-                       href=""
-                      className="media dropdown-item"
-                    >
+                    <a href="" className="media dropdown-item">
                       <div className="avatar">
-                        <img src="../assets/global/images/203.jpg"  alt="true" />{" "}
+                        <img src="../assets/global/images/203.jpg" alt="true" />{" "}
                         <span className="badge badge-success">5</span>
                       </div>
                       <div className="media-body">
@@ -217,12 +203,9 @@ export default class MainPage extends Component {
                         </small>
                       </div>
                     </a>
-                    <a
-                       href=""
-                      className="media dropdown-item"
-                    >
+                    <a href="" className="media dropdown-item">
                       <div className="avatar">
-                        <img src="../assets/global/images/101.jpg"  alt="true" />{" "}
+                        <img src="../assets/global/images/101.jpg" alt="true" />{" "}
                         <span className="badge badge-success">9</span>
                       </div>
                       <div className="media-body">
@@ -232,12 +215,9 @@ export default class MainPage extends Component {
                         </small>
                       </div>
                     </a>
-                    <a
-                       href=""
-                      className="media dropdown-item"
-                    >
+                    <a href="" className="media dropdown-item">
                       <div className="avatar">
-                        <img src="../assets/global/images/202.jpg"  alt="true" />{" "}
+                        <img src="../assets/global/images/202.jpg" alt="true" />{" "}
                         <span className="badge badge-success">1</span>
                       </div>
                       <div className="media-body">
@@ -285,14 +265,14 @@ export default class MainPage extends Component {
                 id="navbar-search-toggler"
                 className="nav-item hidden-xl-up hidden-sm-down"
               >
-                <a className="nav-link"  href="" data-toggle="navbar-search">
+                <a className="nav-link" href="" data-toggle="navbar-search">
                   <span className="zmdi zmdi-hc-lg zmdi-search" />
                 </a>
               </li>
               <li className="nav-item dropdown">
                 <a
                   className="nav-link site-user dropdown-toggle"
-                   href=""
+                  href=""
                   data-toggle="dropdown"
                   aria-haspopup="true"
                   aria-expanded="false"
@@ -300,7 +280,7 @@ export default class MainPage extends Component {
                   <img
                     className="nav-img"
                     src="../assets/global/images/user-img.png"
-                     alt="true"
+                    alt="true"
                   />{" "}
                   <span className="nav-text hidden-sm-down ml-2">Daniel</span>{" "}
                   <i className="nav-caret hidden-sm-down zmdi zmdi-hc-sm zmdi-chevron-down" />
@@ -312,22 +292,22 @@ export default class MainPage extends Component {
                   <a className="dropdown-item dropdown-menu-cap">
                     Daniel Alexander
                   </a>{" "}
-                  <a className="dropdown-item"  href="">
+                  <a className="dropdown-item" href="">
                     <i className="fa fa-user-o mr-3" /> <span>My Profile</span>
                   </a>
-                  <a className="dropdown-item"  href="">
+                  <a className="dropdown-item" href="">
                     <i className="fa fa-list-ul mr-3" /> <span>My Tasks</span>{" "}
                   </a>
-                  <a className="dropdown-item"  href="">
+                  <a className="dropdown-item" href="">
                     <i className="fa fa-envelope-o mr-3" />{" "}
                     <span>My Inbox</span>
                   </a>
                   <div className="dropdown-divider" />
-                  <a className="dropdown-item"  href="">
+                  <a className="dropdown-item" href="">
                     <i className="fa fa-file-o mr-3" />
                     <span>Lock Screen</span>{" "}
                   </a>
-                  <a className="dropdown-item"  href="">
+                  <a className="dropdown-item" href="">
                     <i className="fa fa-power-off mr-3" /> <span>Logout</span>
                   </a>
                 </div>

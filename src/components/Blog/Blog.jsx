@@ -11,14 +11,14 @@ export default class Blog extends Component {
     };
   }
   persistState = () => {
-    return localStorage.setItem(
+    localStorage.setItem(
       process.env.REACT_APP_BLOG,
       JSON.stringify(this.props.location.state.blog)
     );
   };
   componentDidMount() {
     this.persistState();
-    console.log(process.env);
+    console.log(process.env);    
   }
 
   render() {
