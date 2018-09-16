@@ -20,9 +20,6 @@ export default class Comments extends Component {
       );
     });
   };
-  componentDidMount() {
-    console.log(this.props.comments);
-  }
   render() {
     return (
       <React.Fragment>
