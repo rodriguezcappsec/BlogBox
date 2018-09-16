@@ -6,7 +6,7 @@ import BlogsGrid from "./components/Blog/BlogsGrid";
 import blogSerivce from "./services/blogService";
 import { Switch, Route } from "react-router-dom";
 import Blog from "./components/Blog/Blog";
-import Login from "./services/authService";
+import Authentication from "./services/authService";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -16,7 +16,6 @@ class App extends Component {
       loged: false
     };
   }
-  // blogs = () => {};
   getLocalStorage = () => {
     return localStorage.getItem(process.env.REACT_APP_MY_TOKEN_KEY);
   };

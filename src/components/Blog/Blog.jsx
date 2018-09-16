@@ -1,13 +1,26 @@
 import React, { Component } from "react";
 import Zoom from "@material-ui/core/Zoom";
 import Comments from "./Comments";
+import commentService from "../../services/commentService";
+import blogService from "../../services/blogService";
 export default class Blog extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      blogID: this.props.location.state.id
+      blog: this.props.location.state.blog
     };
   }
+  persistState = () => {
+    return localStorage.setItem(
+      process.env.REACT_APP_BLOG,
+      JSON.stringify(this.props.location.state.blog)
+    );
+  };
+  componentDidMount() {
+    this.persistState();
+    console.log(process.env);
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -28,22 +41,15 @@ export default class Blog extends Component {
                   <img
                     className="avatar-floating-left avatar avatar-circle avatar-xl"
                     src="../assets/global/images/217.jpg"
-                    alt
+                    alt="true"
                   />
+                  {/*avatar picture here*/}
                 </div>
               </div>
               <div className="card-body mt-4">
-                <h5 className="mb-4">This Is A Random Post Heading</h5>
-                <p className="card-text">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis
-                  obcaecati autem, fuga enim officia nulla blanditiis sed,
-                  veritatis rerum eum eligendi impedit ut. Magni unde,
-                  architecto! Iusto delectus earum tempore perferendis labore
-                  tempora ratione inventore ut mollitia pariatur quod animi,
-                  neque voluptatem quam quasi aperiam, aliquam explicabo
-                  consectetur voluptatum, culpa.
-                </p>
-                <p className="card-text">
+                <h5 className="mb-4">{this.state.blog.title}</h5>
+                <p className="card-text">{this.state.blog.article}</p>
+                {/* <p className="card-text">
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                   Numquam aliquid accusamus, eius. Molestias totam excepturi
                   consequuntur recusandae suscipit deleniti, a vero dolore
@@ -76,20 +82,19 @@ export default class Blog extends Component {
                   quisquam. Doloremque architecto totam, aliquid vero quasi quia
                   quae, veritatis in illum fuga eaque cumque nisi, dolorem dicta
                   minus. Adipisci quas deleniti ratione.
-                </p>
-                <p className="card-text">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Ratione perspiciatis possimus aut.
-                </p>
+                </p> */}
               </div>
             </div>
             {/* /.card */}
+            <div className="text-center">
+              <h6 className="mb-4">{this.state.blog.date}</h6>
+            </div>
             <div className="text-center">
               <button className="btn btn-lg btn-success px-5 py-3">
                 LEAVE A COMMENT
               </button>
             </div>
-            <Comments />
+            <Comments comments={this.state.blog.comments} />
           </div>
         </Zoom>
       </React.Fragment>

@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import Slide from "@material-ui/core/Slide";
 
 export default class BlogsGrid extends Component {
-
   render() {
     return (
       <React.Fragment>
@@ -44,7 +43,7 @@ export default class BlogsGrid extends Component {
                       </p>
                       <div className="mt-4">
                         <Link
-                          to={{ pathname: "/blog", state: { id: blog._id } }}
+                          to={{ pathname: "/blog", state: { blog: blog } }}
                           className="btn btn-rounded btn-success "
                         >
                           Read More
@@ -52,7 +51,7 @@ export default class BlogsGrid extends Component {
                       </div>
                       <hr />
                       <div className="d-flex">
-                                    {this.props.loged ? (
+                        {this.props.loged ? (
                           <div className="mr-auto">
                             <button className="btn btn-icon btn-lg circle mr-1 bg-faded text-gray">
                               <i className="fa fa-thumbs-up" />
@@ -68,7 +67,7 @@ export default class BlogsGrid extends Component {
                           </button>{" "}
                           <span>{blog.comments.length}</span>
                         </div>
-                                    {this.props.loged ? (
+                        {this.props.loged ? (
                           <div className="ml-4">
                             <button className="btn btn-icon btn-lg circle mr-1 bg-faded text-gray">
                               <i className="fa fa-plus" />

@@ -9,7 +9,7 @@ export default class MainPage extends Component {
       <React.Fragment>
         <nav className="site-navbar navbar fixed-top navbar-expand-lg navbar-dark bg-blue">
           <div className="navbar-header">
-            <a className="navbar-brand" href="index.html">
+            <a className="navbar-brand" href="">
               <span className="brand-name hidden-fold">BlogBox</span>{" "}
             </a>
             {/* <a
