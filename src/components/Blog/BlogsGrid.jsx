@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Slide from "@material-ui/core/Slide";
 
 export default class BlogsGrid extends Component {
+
   render() {
     return (
       <React.Fragment>
@@ -28,7 +29,7 @@ export default class BlogsGrid extends Component {
                         <img
                           className="avatar-floating-left avatar avatar-circle avatar-md"
                           src="../assets/global/images/206.jpg"
-                          alt="true"
+                          alt=""
                         />
                       </div>
                     </div>
@@ -43,7 +44,7 @@ export default class BlogsGrid extends Component {
                       </p>
                       <div className="mt-4">
                         <Link
-                          to={{ pathname: "/blog", state: { blog: blog } }}
+                          to={`/blog/${blog._id}`}
                           className="btn btn-rounded btn-success "
                         >
                           Read More

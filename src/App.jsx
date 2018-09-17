@@ -6,7 +6,11 @@ import BlogsGrid from "./components/Blog/BlogsGrid";
 import blogSerivce from "./services/blogService";
 import { Switch, Route } from "react-router-dom";
 import Blog from "./components/Blog/Blog";
+import jwt from "jsonwebtoken";
+
 import Authentication from "./services/authService";
+
+const LocalStorageProvider = React.createContext();
 class App extends Component {
   constructor(props) {
     super(props);
@@ -33,7 +37,18 @@ class App extends Component {
     this.blogs();
   };
   componentDidMount = () => {
-    this.onLogIn();
+    const authenticate = new Authentication({
+      email: "lasnoches@test.com",
+      password: "111"
+    });
+    authenticate.logIn().then(() => {
+      this.onLogIn();
+      const token = jwt.verify(
+        localStorage.getItem(process.env.REACT_APP_MY_TOKEN_KEY),
+        process.env.REACT_APP_DECODE_TOKEN
+      );
+      console.log(token);
+    });
   };
   render() {
     return (
@@ -45,13 +60,17 @@ class App extends Component {
             <Route
               exact
               name="blog"
-              path="/blog"
+              path="/blog/:id"
               render={props => (
-                <Blog
-                  {...props}
-                  user={this.state.user}
-                  loged={this.state.loged}
-                />
+                <LocalStorageProvider.Consumer>
+                  {contet => (
+                    <Blog
+                      {...props}
+                      user={this.state.user}
+                      loged={this.state.loged}
+                    />
+                  )}
+                </LocalStorageProvider.Consumer>
               )}
             />
 
@@ -59,11 +78,16 @@ class App extends Component {
               exact
               path="/"
               render={props => (
-                <BlogsGrid
-                  {...props}
-                  blogs={this.state.blogs}
-                  loged={this.state.loged}
-                />
+                <LocalStorageProvider.Consumer>
+                  {contet => (
+                    <BlogsGrid
+                      {...props}
+                      blogs={this.state.blogs}
+                      loged={this.state.loged}
+                      aja={contet}
+                    />
+                  )}
+                </LocalStorageProvider.Consumer>
               )}
             />
           </Switch>
