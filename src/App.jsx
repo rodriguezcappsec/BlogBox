@@ -7,7 +7,7 @@ import blogSerivce from "./services/blogService";
 import { Switch, Route } from "react-router-dom";
 import Blog from "./components/Blog/Blog";
 import jwt from "jsonwebtoken";
-
+import AuthModal from "./components/Modal/AuthModal";
 import Authentication from "./services/authService";
 
 const LocalStorageProvider = React.createContext();
@@ -17,7 +17,18 @@ class App extends Component {
     this.state = {
       user: "",
       blogs: [],
-      loged: false
+      loged: false,
+      "sign-in": {
+        email: "",
+        password: ""
+      },
+      "sign-up": {
+        userName: "",
+        avatar: "",
+        email: "",
+        password: "",
+        password_confirmation: ""
+      }
     };
   }
   getLocalStorage = () => {
@@ -37,24 +48,25 @@ class App extends Component {
     this.blogs();
   };
   componentDidMount = () => {
-    const authenticate = new Authentication({
-      email: "lasnoches@test.com",
-      password: "111"
-    });
-    authenticate.logIn().then(() => {
-      this.onLogIn();
-      const token = jwt.verify(
-        localStorage.getItem(process.env.REACT_APP_MY_TOKEN_KEY),
-        process.env.REACT_APP_DECODE_TOKEN
-      );
-      console.log(token);
-    });
+    // const authenticate = new Authentication({
+    //   email: "lasnoches@test.com",
+    //   password: "111"
+    // });
+    // authenticate.logIn().then(() => {
+    //   this.onLogIn();
+    //   const token = jwt.verify(
+    //     localStorage.getItem(process.env.REACT_APP_MY_TOKEN_KEY),
+    //     process.env.REACT_APP_DECODE_TOKEN
+    //   );
+    //   console.log(token);
+    // });
+    this.onLogIn();
   };
   render() {
     return (
       <React.Fragment>
-        <NavBar />
-        <Header />
+        <NavBar loged={this.state.loged} />
+        <Header loged={this.state.loged} />
         <Main>
           <Switch>
             <Route
@@ -62,36 +74,27 @@ class App extends Component {
               name="blog"
               path="/blog/:id"
               render={props => (
-                <LocalStorageProvider.Consumer>
-                  {contet => (
-                    <Blog
-                      {...props}
-                      user={this.state.user}
-                      loged={this.state.loged}
-                    />
-                  )}
-                </LocalStorageProvider.Consumer>
+                <Blog
+                  {...props}
+                  user={this.state.user}
+                  loged={this.state.loged}
+                />
               )}
             />
-
             <Route
               exact
               path="/"
               render={props => (
-                <LocalStorageProvider.Consumer>
-                  {contet => (
-                    <BlogsGrid
-                      {...props}
-                      blogs={this.state.blogs}
-                      loged={this.state.loged}
-                      aja={contet}
-                    />
-                  )}
-                </LocalStorageProvider.Consumer>
+                <BlogsGrid
+                  {...props}
+                  blogs={this.state.blogs}
+                  loged={this.state.loged}
+                />
               )}
             />
           </Switch>
         </Main>
+        <AuthModal />
       </React.Fragment>
     );
   }
