@@ -1,4 +1,5 @@
 import Axios from "axios";
+import { TOKEN } from "./constants";
 // require("dotenv").config();
 
 const token = () => localStorage.getItem(process.env.REACT_APP_MY_TOKEN_KEY);
@@ -6,7 +7,7 @@ const token = () => localStorage.getItem(process.env.REACT_APP_MY_TOKEN_KEY);
 let post = (url, data) => {
   return Axios.post(url, data, {
     headers: {
-      Authorization: "Bearer " + token()
+      Authorization: "Bearer " + TOKEN()
     }
   });
 };
@@ -21,7 +22,7 @@ let get = (url, id) => {
 let update = (url, id, data) => {
   return Axios.patch(`${url}/${id}`, Object.keys(data).length < 1 ? "" : data, {
     headers: {
-      Authorization: "Bearer " + token()
+      Authorization: "Bearer " + TOKEN()
     }
   });
 };
@@ -29,7 +30,7 @@ let update = (url, id, data) => {
 let del = (url, id) =>
   Axios.delete(`${url}/${id}`, {
     headers: {
-      Authorization: "Bearer " + token()
+      Authorization: "Bearer " + TOKEN()
     }
   });
 
