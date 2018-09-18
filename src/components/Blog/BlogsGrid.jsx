@@ -57,7 +57,7 @@ export default class BlogsGrid extends Component {
                             <button className="btn btn-icon btn-lg circle mr-1 bg-faded text-gray">
                               <i className="fa fa-thumbs-up" />
                             </button>{" "}
-                            <span>121</span>
+                            <span>0</span>
                           </div>
                         ) : (
                           ""

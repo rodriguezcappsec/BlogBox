@@ -6,10 +6,12 @@ import BlogsGrid from "./components/Blog/BlogsGrid";
 import blogSerivce from "./services/blogService";
 import { Switch, Route } from "react-router-dom";
 import Blog from "./components/Blog/Blog";
-import jwt from "jsonwebtoken";
 import AuthModal from "./components/Modal/AuthModal";
 import Authentication from "./services/authService";
 import getFormFields from "./utils/getFormField";
+import { TOKEN, DECODE_TOKEN } from "./utils/constants";
+import jwt from "jsonwebtoken";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -31,48 +33,49 @@ class App extends Component {
     };
     this.getFormFields = getFormFields.bind(this);
   }
-  getLocalStorage = () => {
-    return localStorage.getItem(process.env.REACT_APP_MY_TOKEN_KEY);
-  };
+
   blogs = () => {
     blogSerivce.find().then(blogs => {
       this.setState({ blogs: blogs });
     });
   };
-  onLogIn = () => {
-    if (this.getLocalStorage()) {
-      this.setState({ loged: true });
-      this.blogs();
+  onSignedUp = () => {
+    if (TOKEN()) {
+      this.setState({ user: DECODE_TOKEN() });
+      console.log(this.state.user);
+      this.setState({ loged: true }, () => {
+        this.blogs();
+      });
       return;
     }
     this.blogs();
   };
-  handleLogin = () => {
+  handleLogin = e => {
+    e.preventDefault();
     const authenticate = new Authentication(this.state.signIn);
     authenticate.logIn().then(() => {
-      
-    })
+      document.getElementById("close-modal").click();
+      console.log(this.state.user);
+      this.onSignedUp();
+    });
+  };
+  handleLogOut = (e) => {
+    e.preventDefault();
+    const signOut = new Authentication();
+    signOut.logOut().then(() => {
+      this.setState({ user: "" });
+      this.setState({ loged: false });
+      this.onSignedUp();
+    });
   };
   componentDidMount = () => {
-    // const authenticate = new Authentication({
-    //   email: "lasnoches@test.com",
-    //   password: "111"
-    // });
-    // authenticate.logIn().then(() => {
-    //   this.onLogIn();
-    //   const token = jwt.verify(
-    //     localStorage.getItem(process.env.REACT_APP_MY_TOKEN_KEY),
-    //     process.env.REACT_APP_DECODE_TOKEN
-    //   );
-    //   console.log(token);
-    // });
-    this.onLogIn();
+    this.onSignedUp();
   };
 
   render() {
     return (
       <React.Fragment>
-        <NavBar loged={this.state.loged} />
+        <NavBar loged={this.state.loged} signOut={this.handleLogOut} />
         <Header loged={this.state.loged} />
         <Main>
           <Switch>
@@ -101,7 +104,7 @@ class App extends Component {
             />
           </Switch>
         </Main>
-        <AuthModal getField={this.getFormFields} />
+        <AuthModal getField={this.getFormFields} onLogedIn={this.handleLogin} />
       </React.Fragment>
     );
   }

@@ -201,7 +201,7 @@ export default class MainPage extends Component {
                       <i className="fa fa-file-o mr-3" />
                       <span>Lock Screen</span>{" "}
                     </a>
-                    <a className="dropdown-item" href="">
+                <a className="dropdown-item" href="" onClick={this.props.signOut} >
                       <i className="fa fa-power-off mr-3" /> <span>
                         Logout
                       </span>

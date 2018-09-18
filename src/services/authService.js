@@ -41,13 +41,14 @@ class Authenticate {
     let helper = await Axios.post(
       endPoints.authUrls.logIn,
       this.credentials.login
-    ).catch(() =>
+    ).catch(() => {
       swal({
         type: "error",
         title: "Oops...",
         text: "Login failed please try again"
-      })
-    );
+      });
+      return;
+    });
     if (helper) {
       localStorage.setItem(
         process.env.REACT_APP_MY_TOKEN_KEY,
@@ -106,19 +107,15 @@ class Authenticate {
     }
   };
   logOut = async () => {
-    let helper = await Axios.delete(
-      endPoints.authUrls.logOut,
-      this.token
-    ).catch(err => {
-      swal({
-        type: "error",
-        title: "Oops...Error trying to log out",
-        text: "Please try again"
-      });
+    swal({
+      type: "success",
+      title: "You sign out",
+      toast: true,
+      position: "bottom-end",
+      showConfirmButton: false,
+      timer: 3000
     });
-    if (helper) {
-      localStorage.removeItem(process.env.REACT_APP_MY_TOKEN_KEY);
-    }
+    return localStorage.removeItem(process.env.REACT_APP_MY_TOKEN_KEY);
   };
 }
 

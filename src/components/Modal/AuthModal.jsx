@@ -30,7 +30,7 @@ export default class AuthModal extends Component {
                   </ul>
                   <div className="tab-content" id="pills-tabContent">
                     <div className="tab-pane fade show active" id="login-tab" role="tabpanel" aria-labelledby="pills-home-tab">
-                      <form>
+                      <form id="logIn-form" onSubmit={this.props.onLogedIn}>
                         <div>
                           <div className="form-group row">
                             <label className="col-sm-4 col-form-label text-sm-right" htmlFor="login-email">
@@ -53,6 +53,9 @@ export default class AuthModal extends Component {
                           <button type="submit" className="btn">
                             Login
                           </button>
+                          {/* <button type="button" id="close-modal" className="btn btn-secondary" data-dismiss="modal">
+                            Close
+                          </button> */}
                         </div>
                       </form>
                     </div>
@@ -107,9 +110,16 @@ export default class AuthModal extends Component {
                           <button type="submit" className="btn">
                             Register
                           </button>
+
                         </div>
                       </form>
-                    </div>
+                  </div>
+                  <hr/>
+                  <button type="button" id="close-modal" className="btn btn-secondary" data-dismiss="modal">
+                    Close
+                  </button>
+                    {/* <div className="modal-footer"> */}
+                    {/* </div> */}
                   </div>
                 </div>
               </div>
