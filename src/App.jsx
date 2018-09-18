@@ -9,8 +9,7 @@ import Blog from "./components/Blog/Blog";
 import jwt from "jsonwebtoken";
 import AuthModal from "./components/Modal/AuthModal";
 import Authentication from "./services/authService";
-
-const LocalStorageProvider = React.createContext();
+import getFormFields from "./utils/getFormField";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -18,11 +17,11 @@ class App extends Component {
       user: "",
       blogs: [],
       loged: false,
-      "sign-in": {
+      signIn: {
         email: "",
         password: ""
       },
-      "sign-up": {
+      register: {
         userName: "",
         avatar: "",
         email: "",
@@ -30,6 +29,7 @@ class App extends Component {
         password_confirmation: ""
       }
     };
+    this.getFormFields = getFormFields.bind(this);
   }
   getLocalStorage = () => {
     return localStorage.getItem(process.env.REACT_APP_MY_TOKEN_KEY);
@@ -47,6 +47,12 @@ class App extends Component {
     }
     this.blogs();
   };
+  handleLogin = () => {
+    const authenticate = new Authentication(this.state.signIn);
+    authenticate.logIn().then(() => {
+      
+    })
+  };
   componentDidMount = () => {
     // const authenticate = new Authentication({
     //   email: "lasnoches@test.com",
@@ -62,6 +68,7 @@ class App extends Component {
     // });
     this.onLogIn();
   };
+
   render() {
     return (
       <React.Fragment>
@@ -94,7 +101,7 @@ class App extends Component {
             />
           </Switch>
         </Main>
-        <AuthModal />
+        <AuthModal getField={this.getFormFields} />
       </React.Fragment>
     );
   }

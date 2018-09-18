@@ -1,5 +1,5 @@
 import swal from "sweetalert2";
-import verbs from "./verbs";
+import verbs from "../utils/verbs";
 import endPoints from "./endPoints";
 
 const blogService = {

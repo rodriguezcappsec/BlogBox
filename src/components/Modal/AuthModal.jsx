@@ -1,8 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
 export default class AuthModal extends Component {
-
-
   render() {
     return <React.Fragment>
         <div className="modal fade" id="auth-modal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -39,7 +37,7 @@ export default class AuthModal extends Component {
                               Email
                             </label>
                             <div className="col-md-5 col-sm-8">
-                              <input type="email" className="form-control" id="login-email" name="login-email" placeholder="Email" required />
+                              <input onChange={e => this.props.getField(e, "signIn")} type="email" className="form-control" id="login-email" name="email" placeholder="Email" required />
                             </div>
                           </div>
                           <div className="form-group row">
@@ -47,13 +45,13 @@ export default class AuthModal extends Component {
                               Password
                             </label>
                             <div className="col-md-5 col-sm-8">
-                              <input type="password" className="form-control" id="login-password" name="login-password" placeholder="Password" required />
+                              <input onChange={e => this.props.getField(e, "signIn")} type="password" className="form-control" id="login-password" name="password" placeholder="Password" required />
                             </div>
                           </div>
                         </div>
                         <div className="modal-footer">
                           <button type="submit" className="btn">
-                           Login
+                            Login
                           </button>
                         </div>
                       </form>
@@ -75,35 +73,35 @@ export default class AuthModal extends Component {
                             </label>
                             <div className="col-md-5 col-sm-8">
                               <label className="custom-file">
-                              <input type="file" id="avatar" name="avatar" className="custom-file-input" />
+                                <input type="file" id="avatar" name="avatar" className="custom-file-input" />
                                 <span className="custom-file-control" />
                               </label>
                             </div>
-                        </div>
-                        <div className="form-group row">
-                          <label className="col-sm-4 col-form-label text-sm-right" htmlFor="register-email">
-                            Email
-                            </label>
-                          <div className="col-md-5 col-sm-8">
-                            <input type="email" className="form-control" id="register-email" name="register-email" placeholder="Email" required />
                           </div>
-                        </div>
-                        <div className="form-group row">
-                          <label className="col-sm-4 col-form-label text-sm-right" htmlFor="register-password">
-                            Password
+                          <div className="form-group row">
+                            <label className="col-sm-4 col-form-label text-sm-right" htmlFor="register-email">
+                              Email
                             </label>
-                          <div className="col-md-5 col-sm-8">
-                            <input type="password" className="form-control" id="register-password" name="register-password" placeholder="Password" required />
+                            <div className="col-md-5 col-sm-8">
+                              <input type="email" className="form-control" id="register-email" name="register-email" placeholder="Email" required />
+                            </div>
                           </div>
-                        </div>
-                        <div className="form-group row">
-                          <label className="col-sm-4 col-form-label text-sm-right" htmlFor="confirm-password">
-                            Confirm Password
+                          <div className="form-group row">
+                            <label className="col-sm-4 col-form-label text-sm-right" htmlFor="register-password">
+                              Password
                             </label>
-                          <div className="col-md-5 col-sm-8">
-                            <input type="password" className="form-control" id="confirm-password" name="confirm-password" placeholder="Confirm Password" required />
+                            <div className="col-md-5 col-sm-8">
+                              <input type="password" className="form-control" id="register-password" name="register-password" placeholder="Password" required />
+                            </div>
                           </div>
-                        </div>
+                          <div className="form-group row">
+                            <label className="col-sm-4 col-form-label text-sm-right" htmlFor="confirm-password">
+                              Confirm Password
+                            </label>
+                            <div className="col-md-5 col-sm-8">
+                              <input type="password" className="form-control" id="confirm-password" name="confirm-password" placeholder="Confirm Password" required />
+                            </div>
+                          </div>
                         </div>
                         <div className="modal-footer">
                           <button type="submit" className="btn">
@@ -115,11 +113,6 @@ export default class AuthModal extends Component {
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-dismiss="modal">
-                Close
-              </button>
             </div>
           </div>
         </div>
