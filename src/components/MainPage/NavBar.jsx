@@ -3,11 +3,18 @@ import { Link } from "react-router-dom";
 export default class MainPage extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      newPassword: {
+        old: "",
+        new:"",
+      }
+    };
   }
+
+
   render() {
     return <React.Fragment>
-        <nav className="site-navbar navbar fixed-top navbar-expand-lg navbar-dark bg-blue">
+        <nav className="site-navbar navbar fixed-top navbar-expand-lg navbar-dark bg-orange">
           <div className="navbar-header">
             <Link to="/" className="navbar-brand" href="">
               <span className="brand-name hidden-fold">BlogBox</span>{" "}
@@ -174,34 +181,21 @@ export default class MainPage extends Component {
               {this.props.loged ? <li className="nav-item dropdown">
                   <a className="nav-link site-user dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img className="nav-img" src="../assets/global/images/user-img.png" alt="true" /> <span className="nav-text hidden-sm-down ml-2">
-                      Daniel
+                      {this.props.userInfo.userName}
                     </span> <i className="nav-caret hidden-sm-down zmdi zmdi-hc-sm zmdi-chevron-down" />
                   </a>
                   <div className="dropdown-menu dropdown-menu-right p-0" data-plugin="dropdownCaret">
-                    <a className="dropdown-item dropdown-menu-cap">
-                      Daniel Alexander
-                    </a>
                     <a className="dropdown-item" href="">
                       <i className="fa fa-user-o mr-3" /> <span>
                         My Profile
                       </span>
                     </a>
-                    <a className="dropdown-item" href="">
-                      <i className="fa fa-list-ul mr-3" /> <span>
-                        My Tasks
-                      </span>{" "}
-                    </a>
-                    <a className="dropdown-item" href="">
-                      <i className="fa fa-envelope-o mr-3" /> <span>
-                        My Inbox
-                      </span>
-                    </a>
                     <div className="dropdown-divider" />
-                    <a className="dropdown-item" href="">
-                      <i className="fa fa-file-o mr-3" />
-                      <span>Lock Screen</span>{" "}
+                    <a className="dropdown-item" data-toggle="modal" data-target="#change-password-modal" href="">
+                      <i className="fa fa-user-secret mr-3" />
+                      <span>Change Password</span>{" "}
                     </a>
-                <a className="dropdown-item" href="" onClick={this.props.signOut} >
+                    <a className="dropdown-item" href="" onClick={this.props.signOut}>
                       <i className="fa fa-power-off mr-3" /> <span>
                         Logout
                       </span>
@@ -212,7 +206,6 @@ export default class MainPage extends Component {
                   <span className="nav-text hidden-sm-down ml-2">
                     Join In
                   </span>
-                  {/* <i className="nav-caret hidden-sm-down zmdi zmdi-hc-sm zmdi-chevron-down" /> */}
                 </a>}
             </ul>
             {/* /.navbar-nav */}

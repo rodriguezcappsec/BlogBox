@@ -16,17 +16,13 @@ class Authenticate {
         credentials: {
           userName: authenticate.userName || "",
           email: authenticate.email || "",
+          avatar: authenticate.avatar || "",
           password: authenticate.password || "",
           password_confirmation: authenticate.password_confirmation || ""
         }
       },
       changePassword: {
-        passwords: {
-          passwords: {
-            old: authenticate.old || "",
-            new: authenticate.new || ""
-          }
-        }
+        passwords: { old: authenticate.old || "", new: authenticate.new || "" }
       }
     };
     this.token = {
@@ -66,6 +62,7 @@ class Authenticate {
     }
   };
   register = async () => {
+    console.log(this.credentials.register)
     let helper = await Axios.post(
       endPoints.authUrls.register,
       this.credentials.register
@@ -77,18 +74,13 @@ class Authenticate {
       })
     );
     if (helper) {
-      swal({
-        type: "success",
-        title: "Great!!!",
-        text: "Account successfully created!"
-      });
       return helper.data.user;
     }
   };
   changePassword = async () => {
     let helper = await Axios.patch(
       endPoints.authUrls.changePassword,
-      this.credentials.changePassword.passwords,
+      this.credentials.changePassword,
       this.token
     ).catch(err => {
       swal({
@@ -101,7 +93,7 @@ class Authenticate {
       swal({
         type: "success",
         title: "Great!!!",
-        text: "Account successfully created!"
+        text: "Password successfully changed!"
       });
       return helper.data.user;
     }

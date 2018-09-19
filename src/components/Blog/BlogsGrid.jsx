@@ -22,13 +22,13 @@ export default class BlogsGrid extends Component {
                     <div className="cover">
                       <img
                         className="card-img-top"
-                        src="../assets/global/images/dash1-widget-1.jpg"
+                        src={blog.image}
                         alt="true"
                       />
                       <div className="cover-overlay">
                         <img
                           className="avatar-floating-left avatar avatar-circle avatar-md"
-                          src="../assets/global/images/206.jpg"
+                          src={blog.userID.avatar}
                           alt=""
                         />
                       </div>

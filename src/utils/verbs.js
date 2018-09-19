@@ -1,9 +1,5 @@
 import Axios from "axios";
 import { TOKEN } from "./constants";
-// require("dotenv").config();
-
-const token = () => localStorage.getItem(process.env.REACT_APP_MY_TOKEN_KEY);
-
 let post = (url, data) => {
   return Axios.post(url, data, {
     headers: {

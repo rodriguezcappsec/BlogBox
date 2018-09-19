@@ -18,12 +18,12 @@ export default class AuthModal extends Component {
                 <div>
                   <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
                     <li className="nav-item">
-                      <a className="nav-link active" id="pills-home-tab" data-toggle="pill" href="#login-tab" role="tab" aria-controls="pills-home" aria-selected="true">
+                      <a className="nav-link active" id="pills-login-tab" data-toggle="pill" href="#login-tab" role="tab" aria-controls="pills-home" aria-selected="true">
                         Login
                       </a>
                     </li>
                     <li className="nav-item">
-                      <a className="nav-link" id="pills-profile-tab" data-toggle="pill" href="#register-tab" role="tab" aria-controls="pills-profile" aria-selected="false">
+                      <a className="nav-link" id="pills-register-tab" data-toggle="pill" href="#register-tab" role="tab" aria-controls="pills-profile" aria-selected="false">
                         Register
                       </a>
                     </li>
@@ -60,14 +60,14 @@ export default class AuthModal extends Component {
                       </form>
                     </div>
                     <div className="tab-pane fade" id="register-tab" role="tabpanel" aria-labelledby="pills-profile-tab">
-                      <form>
+                      <form onSubmit={this.props.onRegister}>
                         <div>
                           <div className="form-group row">
                             <label className="col-sm-4 col-form-label text-sm-right" htmlFor="userName">
                               User Name
                             </label>
                             <div className="col-md-5 col-sm-8">
-                              <input type="text" className="form-control" id="userName" name="userName" placeholder="User Name" required />
+                              <input type="text" onChange={e => this.props.getField(e, "register")} className="form-control" id="userName" name="userName" placeholder="User Name" required />
                             </div>
                           </div>
                           <div className="form-group row">
@@ -76,7 +76,7 @@ export default class AuthModal extends Component {
                             </label>
                             <div className="col-md-5 col-sm-8">
                               <label className="custom-file">
-                                <input type="file" id="avatar" name="avatar" className="custom-file-input" />
+                                <input type="file" id="avatar" onChange={e => this.props.getField(e, "register")} name="avatar" className="custom-file-input" />
                                 <span className="custom-file-control" />
                               </label>
                             </div>
@@ -86,7 +86,7 @@ export default class AuthModal extends Component {
                               Email
                             </label>
                             <div className="col-md-5 col-sm-8">
-                              <input type="email" className="form-control" id="register-email" name="register-email" placeholder="Email" required />
+                            <input type="email" className="form-control" onChange={e => this.props.getField(e, "register")} id="register-email" name="email" placeholder="Email" required />
                             </div>
                           </div>
                           <div className="form-group row">
@@ -94,7 +94,7 @@ export default class AuthModal extends Component {
                               Password
                             </label>
                             <div className="col-md-5 col-sm-8">
-                              <input type="password" className="form-control" id="register-password" name="register-password" placeholder="Password" required />
+                            <input type="password" className="form-control" onChange={e => this.props.getField(e, "register")} id="register-password" name="password" placeholder="Password" required />
                             </div>
                           </div>
                           <div className="form-group row">
@@ -102,7 +102,7 @@ export default class AuthModal extends Component {
                               Confirm Password
                             </label>
                             <div className="col-md-5 col-sm-8">
-                              <input type="password" className="form-control" id="confirm-password" name="confirm-password" placeholder="Confirm Password" required />
+                            <input type="password" className="form-control" onChange={e => this.props.getField(e, "register")} id="confirm-password" name="password_confirmation" placeholder="Confirm Password" required />
                             </div>
                           </div>
                         </div>
