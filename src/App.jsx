@@ -3,16 +3,17 @@ import NavBar from "./components/MainPage/NavBar";
 import Header from "./components/MainPage/Header";
 import Main from "./components/MainPage/Main";
 import BlogsGrid from "./components/Blog/BlogsGrid";
-import blogSerivce from "./services/blogService";
-import { Switch, Route } from "react-router-dom";
+import blogService from "./services/blogService";
+import { Switch, Route, Redirect } from "react-router-dom";
 import Blog from "./components/Blog/Blog";
 import AuthModal from "./components/Modal/AuthModal";
 import ChangePassModal from "./components/Modal/ChangePasswordModal";
+import CreateBlogModal from "./components/Modal/CreateBlogModal";
 import Authentication from "./services/authService";
 import getFormFields from "./utils/getFormField";
-import upload from "./services/imageUpload";
 import { TOKEN, DECODE_TOKEN } from "./utils/constants";
 import imageUpload from "./services/imageUpload";
+import MyProfile from "./components/Profile/MyProfile";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -34,16 +35,26 @@ class App extends Component {
       changePassword: {
         old: "",
         new: ""
+      },
+      newBlog: {
+        title: "",
+        image: "",
+        likes: 0,
+        article: "",
+        topic: ""
       }
     };
     this.getFormFields = getFormFields.bind(this);
   }
 
+  //Getting all the blogs
   blogs = () => {
-    blogSerivce.find().then(blogs => {
+    blogService.find().then(blogs => {
       this.setState({ blogs: blogs });
     });
   };
+
+  //Determines if the user is authenticated
   onSignedUp = () => {
     if (TOKEN()) {
       this.setState({ user: DECODE_TOKEN() });
@@ -54,6 +65,8 @@ class App extends Component {
     }
     this.blogs();
   };
+
+  // Handle user authentication login in the user
   handleLogin = e => {
     e.preventDefault();
     const authenticate = new Authentication(this.state.signIn);
@@ -62,6 +75,29 @@ class App extends Component {
       this.onSignedUp();
     });
   };
+  handleNewBlog = e => {
+    e.preventDefault();
+    imageUpload(this.state.newBlog.image)
+      .then(image => {
+        blogService
+          .create({
+            blog: {
+              title: this.state.newBlog.title,
+              image: image.data.secure_url,
+              likes: 0,
+              article: this.state.newBlog.article,
+              topic: this.state.newBlog.topic
+            }
+          })
+          .then(data => {
+            console.log(data);
+            document.getElementById("newBlog-close-modal").click();
+            this.blogs();
+          });
+      })
+      .catch(err => console.error(err));
+  };
+  //Change user password
   handleChangePassword = e => {
     e.preventDefault();
     const authenticate = new Authentication({
@@ -72,7 +108,7 @@ class App extends Component {
       document.getElementById("changePass-close-modal").click();
     });
   };
-
+  //Register user
   handleRegister = e => {
     e.preventDefault();
     imageUpload(this.state.register.avatar)
@@ -97,6 +133,8 @@ class App extends Component {
       })
       .catch(err => console.error(err));
   };
+
+  // Logs out the user
   handleLogOut = e => {
     e.preventDefault();
     const signOut = new Authentication();
@@ -106,6 +144,7 @@ class App extends Component {
       this.onSignedUp();
     });
   };
+
   componentDidMount = () => {
     this.onSignedUp();
   };
@@ -145,6 +184,17 @@ class App extends Component {
                 />
               )}
             />
+            {this.state.loged ? (
+              <Route
+                exact
+                path="/my-profile"
+                render={props => (
+                  <MyProfile {...props} user={this.state.user} />
+                )}
+              />
+            ) : (
+              <Redirect to="/" />
+            )}
           </Switch>
         </Main>
         <AuthModal
@@ -155,6 +205,10 @@ class App extends Component {
         <ChangePassModal
           getField={this.getFormFields}
           onChangePassword={this.handleChangePassword}
+        />
+        <CreateBlogModal
+          getField={this.getFormFields}
+          onNewBlog={this.handleNewBlog}
         />
       </React.Fragment>
     );

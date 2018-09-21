@@ -25,50 +25,34 @@ export default class Blog extends Component {
     this.getBlog();
   }
   generateBlog = () => {
-    return (
-      <Zoom
-        in={true}
-        style={{ transformOrigin: "0 0 0" }}
-        {...{ timeout: 500 }}
-      >
+    return <Zoom in={true} style={{ transformOrigin: "0 0 0" }} {...{ timeout: 500 }}>
         <div>
           <div className="card mb-5 bg-faded p-2 widget-blog-post">
             <div className="cover">
-              <img
-                className="card-img-top"
-                src={this.state.blog.image}
-                alt=""
-              />
+              <img className="card-img-top" src={this.state.blog.image} alt="" />
               <div className="cover-overlay">
-                <img
-                  className="avatar-floating-left avatar avatar-circle avatar-xl"
-                  src={this.state.user.avatar}
-                  alt=""
-                />
+                <img className="avatar-floating-left avatar avatar-circle avatar-xl" src={this.state.user.avatar} alt="" />
                 {/*avatar picture here*/}
               </div>
             </div>
             <div className="card-body mt-4">
               <h5 className="mb-4">{this.state.blog.title}</h5>
-              <p className="card-text">{this.state.blog.article}</p>
+              <p className="card-text" style={{ textAlign: "justify" }}>
+                {this.state.blog.article}
+              </p>
             </div>
           </div>
           <div className="text-center">
             <h6 className="mb-4">{this.state.blog.date}</h6>
           </div>
-          {this.props.loged ? (
-            <div className="text-center">
+          {this.props.loged ? <div className="text-center">
               <button className="btn btn-lg btn-success px-5 py-3">
                 LEAVE A COMMENT
               </button>
-            </div>
-          ) : (
-            ""
-          )}
+            </div> : ""}
           <Comments comments={this.state.comments} />
         </div>
-      </Zoom>
-    );
+      </Zoom>;
   };
   render() {
     return <React.Fragment>{this.generateBlog()}</React.Fragment>;
