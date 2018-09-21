@@ -7,11 +7,12 @@ import blogSerivce from "./services/blogService";
 import { Switch, Route } from "react-router-dom";
 import Blog from "./components/Blog/Blog";
 import AuthModal from "./components/Modal/AuthModal";
+import ChangePassModal from "./components/Modal/ChangePasswordModal";
 import Authentication from "./services/authService";
 import getFormFields from "./utils/getFormField";
+import upload from "./services/imageUpload";
 import { TOKEN, DECODE_TOKEN } from "./utils/constants";
-import jwt from "jsonwebtoken";
-
+import imageUpload from "./services/imageUpload";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -29,6 +30,10 @@ class App extends Component {
         email: "",
         password: "",
         password_confirmation: ""
+      },
+      changePassword: {
+        old: "",
+        new: ""
       }
     };
     this.getFormFields = getFormFields.bind(this);
@@ -42,7 +47,6 @@ class App extends Component {
   onSignedUp = () => {
     if (TOKEN()) {
       this.setState({ user: DECODE_TOKEN() });
-      console.log(this.state.user);
       this.setState({ loged: true }, () => {
         this.blogs();
       });
@@ -55,11 +59,45 @@ class App extends Component {
     const authenticate = new Authentication(this.state.signIn);
     authenticate.logIn().then(() => {
       document.getElementById("close-modal").click();
-      console.log(this.state.user);
       this.onSignedUp();
     });
   };
-  handleLogOut = (e) => {
+  handleChangePassword = e => {
+    e.preventDefault();
+    const authenticate = new Authentication({
+      old: this.state.changePassword.old,
+      new: this.state.changePassword.new
+    });
+    authenticate.changePassword().then(() => {
+      document.getElementById("changePass-close-modal").click();
+    });
+  };
+
+  handleRegister = e => {
+    e.preventDefault();
+    imageUpload(this.state.register.avatar)
+      .then(image => {
+        let authenticate = new Authentication({
+          userName: this.state.register.userName,
+          avatar: image.data.secure_url,
+          email: this.state.register.email,
+          password: this.state.register.password,
+          password_confirmation: this.state.register.password_confirmation
+        });
+        authenticate.register().then(() => {
+          const autoLogin = new Authentication({
+            email: this.state.register.email,
+            password: this.state.register.password
+          });
+          autoLogin.logIn().then(() => {
+            this.onSignedUp();
+          });
+          document.getElementById("close-modal").click();
+        });
+      })
+      .catch(err => console.error(err));
+  };
+  handleLogOut = e => {
     e.preventDefault();
     const signOut = new Authentication();
     signOut.logOut().then(() => {
@@ -75,7 +113,12 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <NavBar loged={this.state.loged} signOut={this.handleLogOut} />
+        <NavBar
+          loged={this.state.loged}
+          signOut={this.handleLogOut}
+          userInfo={this.state.user}
+          onShow={this.changePassModalShow}
+        />
         <Header loged={this.state.loged} />
         <Main>
           <Switch>
@@ -104,7 +147,15 @@ class App extends Component {
             />
           </Switch>
         </Main>
-        <AuthModal getField={this.getFormFields} onLogedIn={this.handleLogin} />
+        <AuthModal
+          getField={this.getFormFields}
+          onLogedIn={this.handleLogin}
+          onRegister={this.handleRegister}
+        />
+        <ChangePassModal
+          getField={this.getFormFields}
+          onChangePassword={this.handleChangePassword}
+        />
       </React.Fragment>
     );
   }

@@ -7,7 +7,7 @@ export default class Comments extends Component {
         <div className="card bg-faded p-3 border-radius-1" key={index}>
           <div className="p-3 media align-items-start">
             <a className="avatar avatar-circle avatar-lg">
-              <img src="../assets/global/images/201.jpg" alt="true" />
+              <img src={comment.userID.avatar} alt="true" />
             </a>
             <div className="media-body">
               <h6>{comment.name}</h6>
