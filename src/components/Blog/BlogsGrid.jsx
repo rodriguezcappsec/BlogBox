@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import Slide from "@material-ui/core/Slide";
 
 export default class BlogsGrid extends Component {
-
   render() {
     return (
       <React.Fragment>

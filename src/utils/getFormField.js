@@ -12,7 +12,7 @@ const getFormFields = function({ target }, stateObjectName) {
   // if an object name from the state is passed to the stateObjectName
   this.setState(
     state => (state[stateObjectName][name] = files ? files[0] : value)
-  );
+  );  
 };
 
 export default getFormFields;

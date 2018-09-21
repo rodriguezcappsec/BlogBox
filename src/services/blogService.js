@@ -25,10 +25,10 @@ const blogService = {
       }
     }
   },
-  create: async (body = { blog: {} }) => {
+  create: async (body) => {
     let helper = await verbs
       .post(endPoints.blogEndPoint, body)
-      .catch(() => {
+      .catch((err) => {
         swal({
           type: "error",
           title: "could not create blog",
@@ -38,6 +38,7 @@ const blogService = {
           timer: 3000
         });
       });
+    
     if (helper) {
       swal({
         type: "success",
