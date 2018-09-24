@@ -34,7 +34,6 @@ export default class MyProfile extends Component {
     }).then(result => {
       if (result.value) {
         blogService.delete(blog._id).then(this.myBlogs);
-        this.props.updateMainState();
       }
     });
   };
