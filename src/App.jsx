@@ -192,7 +192,6 @@ class App extends Component {
                   <MyProfile
                     {...props}
                     user={this.state.user}
-                    updateMainState={this.blogs}
                     key={props.match.params.pageid}
                   />
                 )}
