@@ -29,10 +29,10 @@ const commentService = {
     }
   },
   create: async (body = { comment: {} }) => {
-    let helper = await verbs.post(endPoints.commentEndPoint, body).catch(() => {
+    let helper = await verbs.post(endPoints.commentEndPoint, body).catch((err) => {      
       swal({
         type: "error",
-        title: "could not post comment",
+        title: err.response.data,
         toast: true,
         position: "top-end",
         showConfirmButton: false,
