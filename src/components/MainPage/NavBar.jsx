@@ -12,7 +12,7 @@ export default class MainPage extends Component {
     return <React.Fragment>
         <nav className="site-navbar navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
           <div className="navbar-header">
-            <Link to="/" className="navbar-brand" href="">
+          <Link to="/" onClick={this.props.reRenderParentState} className="navbar-brand" href="">
               <span className="brand-name hidden-fold">BlogBox</span>{" "}
             </Link>
             {/* <button data-toggle="menubar" className="mr-auto hidden-lg-up hamburger hamburger--collapse js-hamburger" type="button">

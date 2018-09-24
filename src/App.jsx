@@ -48,9 +48,9 @@ class App extends Component {
   }
 
   //Getting all the blogs
-  blogs = (optional) => {
+  blogs = optional => {
     blogService.find().then(blogs => {
-      this.setState({ blogs: blogs }, () => { console.log("work") });
+      this.setState({ blogs: blogs });
     });
   };
 
@@ -142,11 +142,11 @@ class App extends Component {
   };
 
   componentDidMount = () => {
-    this.blogs();
     this.onSignedUp();
   };
 
   render() {
+    this.blogs();
     return (
       <React.Fragment>
         <NavBar
