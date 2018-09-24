@@ -48,9 +48,9 @@ class App extends Component {
   }
 
   //Getting all the blogs
-  blogs = () => {
+  blogs = (optional) => {
     blogService.find().then(blogs => {
-      this.setState({ blogs: blogs });
+      this.setState({ blogs: blogs }, () => { console.log("work") });
     });
   };
 
@@ -58,12 +58,8 @@ class App extends Component {
   onSignedUp = () => {
     if (TOKEN()) {
       this.setState({ user: DECODE_TOKEN() });
-      this.setState({ loged: true }, () => {
-        this.blogs();
-      });
-      return;
+      this.setState({ loged: true });
     }
-    this.blogs();
   };
 
   // Handle user authentication login in the user
@@ -146,6 +142,7 @@ class App extends Component {
   };
 
   componentDidMount = () => {
+    this.blogs();
     this.onSignedUp();
   };
 
@@ -184,12 +181,16 @@ class App extends Component {
                 />
               )}
             />
-            {this.state.loged ? (
+            {TOKEN() ? (
               <Route
                 exact
                 path="/my-profile"
                 render={props => (
-                  <MyProfile {...props} user={this.state.user} />
+                  <MyProfile
+                    {...props}
+                    user={this.state.user}
+                    updateMainState={this.blogs}
+                  />
                 )}
               />
             ) : (
