@@ -48,7 +48,7 @@ class App extends Component {
   }
 
   //Getting all the blogs
-  blogs = optional => {
+  blogs = () => {
     blogService.find().then(blogs => {
       this.setState({ blogs: blogs });
     });
@@ -143,10 +143,10 @@ class App extends Component {
 
   componentDidMount = () => {
     this.onSignedUp();
+    this.blogs();
   };
 
   render() {
-    this.blogs();
     return (
       <React.Fragment>
         <NavBar
@@ -167,6 +167,7 @@ class App extends Component {
                   {...props}
                   user={this.state.user}
                   loged={this.state.loged}
+                  key={props.match.params.pageid}
                 />
               )}
             />
@@ -178,6 +179,8 @@ class App extends Component {
                   {...props}
                   blogs={this.state.blogs}
                   loged={this.state.loged}
+                  key={props.match.params.pageid}
+                  refetch={this.blogs}
                 />
               )}
             />
@@ -190,6 +193,7 @@ class App extends Component {
                     {...props}
                     user={this.state.user}
                     updateMainState={this.blogs}
+                    key={props.match.params.pageid}
                   />
                 )}
               />

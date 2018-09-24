@@ -2,7 +2,6 @@ import Axios from "axios";
 import { TOKEN } from "./constants";
 
 let post = (url, body) => {
-  console.log(body.blog);
   return Axios.post(url, body, {
     headers: {
       Authorization: "Bearer " + TOKEN()

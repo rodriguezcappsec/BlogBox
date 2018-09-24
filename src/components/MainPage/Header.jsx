@@ -12,12 +12,12 @@ export default class Header extends Component {
             </ol>
             {this.props.loged ? <ul className="breadcrumb-btns">
                 <li className="dropdown">
-                  <a href="" className="btn btn-sm btn-scondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  {/* <a href="" className="btn btn-sm btn-scondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i className="zmdi zmdi-settings mr-1 text-success" /> <span className="mr-1">
                       Settings
                     </span>
                     <i className="zmdi zmdi-chevron-down" />
-                  </a>
+                  </a> */}
                   <div className="dropdown-menu p-0 mt-1" data-plugin="dropdownCaret">
                     <a className="dropdown-item dropdown-menu-cap">
                       Your Settings
@@ -30,7 +30,7 @@ export default class Header extends Component {
               <a href="" className="btn btn-sm btn-scondary" data-toggle="modal" data-target="#create-blog-modal">
                     <i className="zmdi zmdi-plus mr-1 text-success" /> <span
                     >
-                      Add
+                      Create Blog
                     </span>
                   </a>
                 </li>
