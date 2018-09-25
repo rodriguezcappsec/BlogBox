@@ -36,7 +36,7 @@ export default class MainPage extends Component {
               <li className="nav-item">
                 <div id="navbar-search" className="navbar-search">
                   <form className="form-inline navbar-search-form">
-                    <input className="form-control navbar-search-field" placeholder="Search" type="text" /> <button type="submit" className="navbar-search-submit">
+                    <input className="form-control navbar-search-field" name="searchBar" onChange={e=>this.props.getField(e)} placeholder="Search blog title" type="text" /> <button type="submit" className="navbar-search-submit">
                       <svg className="svg-search-icon">
                         <use xlinkHref="../assets/global/svg-sprite/sprite.svg#search" />
                       </svg>

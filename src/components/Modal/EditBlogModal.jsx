@@ -54,6 +54,7 @@ export default class EditBlogModal extends Component {
                                 className="form-control"
                                 id="blog-title"
                                 name="title"
+                                value={this.props.values.title}
                                 placeholder="Blog Title"
                                 required
                               />
@@ -97,6 +98,7 @@ export default class EditBlogModal extends Component {
                                 id="blog-article"
                                 name="article"
                                 placeholder="Article"
+                                value={this.props.values.article}
                                 required
                               />
                             </div>
@@ -118,6 +120,7 @@ export default class EditBlogModal extends Component {
                                 id="blog-topic"
                                 name="topic"
                                 placeholder="Topic"
+                                value={this.props.values.topic}
                                 required
                               />
                             </div>

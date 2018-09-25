@@ -7,6 +7,8 @@ const getFormField = function({ target }, optionalStateObjectName) {
   // then is assumed that the field is not inside an object in the state
   if (optionalStateObjectName === undefined) {
     this.setState({ [[name]]: files ? files[0] : value });
+    console.log(this.state.searchBar);
+    
     return;
   }
   // if an object name from the state is passed to the stateObjectName
