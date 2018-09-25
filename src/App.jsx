@@ -14,6 +14,7 @@ import getFormFields from "./utils/getFormField";
 import { TOKEN, DECODE_TOKEN } from "./utils/constants";
 import imageUpload from "./services/imageUpload";
 import MyProfile from "./components/Profile/MyProfile";
+import _ from "lodash";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -46,7 +47,16 @@ class App extends Component {
     };
     this.getFormFields = getFormFields.bind(this);
   }
-
+  searchBlog = ({ target }) => {
+    const blogs = this.state.blogs.slice();
+    const filtered = _.filter(blogs, item =>
+      _.startsWith(item.title, target.value)
+    );
+    this.setState({ blogs: filtered });
+    if (target.value === "") {
+      this.blogs();
+    }
+  };
   //Getting all the blogs
   blogs = () => {
     blogService.find().then(blogs => {
@@ -154,6 +164,7 @@ class App extends Component {
           signOut={this.handleLogOut}
           userInfo={this.state.user}
           onShow={this.changePassModalShow}
+          getField={this.searchBlog}
         />
         <Header loged={this.state.loged} />
         <Main>

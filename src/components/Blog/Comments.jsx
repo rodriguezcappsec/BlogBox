@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 export default class Comments extends Component {
+  
   renderComments = () => {
     return this.props.comments.map((comment, index) => {
       return <div className="card bg-faded p-3 border-radius-1" key={index}>
