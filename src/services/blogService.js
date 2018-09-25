@@ -47,13 +47,13 @@ const blogService = {
       return helper.data.blog;
     }
   },
-  update: async (id, body = { blog: {} }) => {
+  update: async (id, body ) => {
     let helper = await verbs
       .update(endPoints.blogEndPoint, id, body)
-      .catch(() => {
+      .catch((err) => {
         swal({
           type: "error",
-          title: "could not update blog",
+          title: err.response.data,
           toast: true,
           position: "top-end",
           showConfirmButton: false,
