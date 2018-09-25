@@ -3,12 +3,22 @@ import Zoom from "@material-ui/core/Zoom";
 import blogService from "../../services/blogService";
 // import { Link } from "react-router-dom";
 import swal from "sweetalert2";
+import getField from "../../utils/getFormField";
+import imageUpload from "../../services/imageUpload";
+import EditBlogModal from "../Modal/EditBlogModal";
 export default class MyProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      myBlogs: []
+      myBlogs: [],
+      editBlog: {
+        title: "",
+        image: "",
+        article: "",
+        topic: ""
+      }
     };
+    this.getField = getField.bind(this);
   }
   myBlogs = () => {
     blogService.find().then(record => {
@@ -21,6 +31,10 @@ export default class MyProfile extends Component {
   componentDidMount() {
     this.myBlogs();
   }
+  tempBlogID = (e, blog) => {
+    e.preventDefault();
+    this.setState({ [e.target.name]: blog._id });
+  };
   onDelete = (e, blog) => {
     e.preventDefault();
     swal({
@@ -37,6 +51,29 @@ export default class MyProfile extends Component {
       }
     });
   };
+
+  onEditBlog = e => {
+    e.preventDefault();
+    imageUpload(this.state.editBlog.image)
+      .then(image => {
+        blogService
+          .update(this.state["tempID"], {
+            blog: {
+              title: this.state.editBlog.title,
+              image: image.data.secure_url,
+              article: this.state.editBlog.article,
+              topic: this.state.editBlog.topic
+            }
+          })
+          .then(data => {
+            console.log(data);
+            document.getElementById("edit-close-modal").click();
+            this.myBlogs();
+          });
+      })
+      .catch(err => console.error(err));
+  };
+
   renderMyBlogList = () => {
     return this.state.myBlogs.map((b, index) => {
       return (
@@ -54,7 +91,14 @@ export default class MyProfile extends Component {
             <div className="row">
               <div className="col-md-3">
                 <div className="col-md-12">
-                  <a href="" className="btn btn-sm btn-warning">
+                  <a
+                    href=""
+                    onClick={e => this.tempBlogID(e, b)}
+                    data-toggle="modal"
+                    data-target="#edit-blog-modal"
+                    name="tempID"
+                    className="btn btn-sm btn-warning"
+                  >
                     Edit
                   </a>
                 </div>
@@ -416,6 +460,7 @@ export default class MyProfile extends Component {
             {/* /.profile-section-main */}
           </div>
         </Zoom>
+        <EditBlogModal onEdit={this.onEditBlog} getField={this.getField} />
       </React.Fragment>
     );
   }

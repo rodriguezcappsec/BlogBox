@@ -10,7 +10,9 @@ const getFormField = function({ target }, optionalStateObjectName) {
     return;
   }
   // if an object name from the state is passed to the stateObjectName
-  this.setState(state => (state[optionalStateObjectName][name] = files ? files[0] : value));  
+  this.setState(
+    state => (state[optionalStateObjectName][name] = files ? files[0] : value)
+  );
 };
 
 export default getFormField;
