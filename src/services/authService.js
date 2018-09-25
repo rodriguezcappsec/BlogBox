@@ -62,7 +62,6 @@ class Authenticate {
     }
   };
   register = async () => {
-    console.log(this.credentials.register)
     let helper = await Axios.post(
       endPoints.authUrls.register,
       this.credentials.register

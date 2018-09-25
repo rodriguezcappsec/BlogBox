@@ -33,6 +33,12 @@ export default class MyProfile extends Component {
   }
   tempBlogID = (e, blog) => {
     e.preventDefault();
+    blogService.find(blog._id).then(record => {
+      const { title, image, article, topic } = record;
+      this.setState({ editBlog: { title, image, article, topic } }, () => {
+        console.log(this.state.editBlog)
+      });
+    });
     this.setState({ [e.target.name]: blog._id });
   };
   onDelete = (e, blog) => {
@@ -460,7 +466,7 @@ export default class MyProfile extends Component {
             {/* /.profile-section-main */}
           </div>
         </Zoom>
-        <EditBlogModal onEdit={this.onEditBlog} getField={this.getField} />
+        <EditBlogModal onEdit={this.onEditBlog} getField={this.getField} values={this.state.editBlog} />
       </React.Fragment>
     );
   }
