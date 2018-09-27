@@ -6,6 +6,7 @@ import swal from "sweetalert2";
 import getField from "../../utils/getFormField";
 import imageUpload from "../../services/imageUpload";
 import EditBlogModal from "../Modal/EditBlogModal";
+
 export default class MyProfile extends Component {
   constructor(props) {
     super(props);
@@ -16,10 +17,12 @@ export default class MyProfile extends Component {
         image: "",
         article: "",
         topic: ""
-      }
+      },
+      favorites: this.props.favorites
     };
     this.getField = getField.bind(this);
   }
+
   myBlogs = () => {
     blogService.find().then(record => {
       const filterBlogs = record.filter(
@@ -77,7 +80,30 @@ export default class MyProfile extends Component {
       })
       .catch(err => console.error(err));
   };
-
+  renderMyFavorites = () => {
+    return this.props.favorites.map((b, index) => {
+      return <div className="col-lg-3 col-sm-6" key={index}>
+          <div className="card">
+            <header className="card-header">
+              <h6 className="card-heading">{++index}</h6>
+            </header>
+            <div className="card-body d-flex px-3">
+              <div className="mr-auto text-primary">
+                <h5>
+                  <span data-plugin="counterUp">{b.title}</span>
+                </h5>
+                <span>{b.userID.userName}</span>
+              </div>
+              <div>
+                <a href="" onClick={e => this.props.onRemoveFavorite(e, b._id)} className="btn btn-sm btn-danger">
+                  Remove
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>;
+    });
+  };
   renderMyBlogList = () => {
     return this.state.myBlogs.map((b, index) => {
       return (
@@ -206,7 +232,7 @@ export default class MyProfile extends Component {
               {/* Tab panes */}
               <div className="tab-content profile-tabs-content">
                 <div
-                  className="tab-pane active"
+                  className="tab-pane active "
                   id="My-blogs"
                   style={{ overflowY: "scroll", height: "300px" }}
                   role="tabpanel"
@@ -219,9 +245,14 @@ export default class MyProfile extends Component {
                             </div> */}
                   {this.renderMyBlogList()}
                 </div>
-                {/* /#profile-overview */}
-
-                {/* /#profile-settings */}
+                <div
+                  className="tab-pane"
+                  id="My-favorite-blogs"
+                  style={{ overflowY: "scroll", height: "300px" }}
+                  role="tabpanel"
+                >
+                  <div className="row">{this.renderMyFavorites()}</div>
+                </div>
               </div>
               {/* /.tab-content */}
             </div>

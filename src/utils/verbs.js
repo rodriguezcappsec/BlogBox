@@ -12,7 +12,11 @@ let post = (url, body) => {
 let get = (url, id) => {
   // let _token =
   //   id === undefined ? "" : { headers: { Authorization: "Bearer " + token() } };
-  return Axios.get(`${url}/${id}`);
+  return Axios.get(`${url}/${id}`, {
+    headers: {
+      Authorization: "Bearer " + TOKEN()
+    }
+  });
 };
 
 //If for some reason you don't need data to update, pass in an empty {}
