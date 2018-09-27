@@ -2,33 +2,19 @@ import swal from "sweetalert2";
 import verbs from "../utils/verbs";
 import endPoints from "./endPoints";
 
-const commentService = {
-  find: async id => {
-    let favoriteID = id === undefined ? "" : id;
-    let helper = await verbs
-      .get(endPoints.favoriteEndPoint, favoriteID)
-      .catch(err => {
-        swal({
-          type: "error",
-          title: "could not get saved blogs",
-          toast: true,
-          position: "top-end",
-          showConfirmButton: false,
-          timer: 3000
-        });
-      });
+const favoriteService = {
+  find: async () => {
+    let helper = await verbs.get(endPoints.favoriteEndPoint,"").catch(err => {});
     if (helper) {
-      if (id === undefined) {
-        return helper.data.favorites;
-      } else {
-        return helper.data.favorite;
-      }
+      return helper.data.favorites;
     }
   },
   //leave favorite={} empty, it will construct what it needs in the backend
-  create: async (blogID, body = { favorite: {} }) => {
+  create: async blogID => {
     let helper = await verbs
-      .post(`${endPoints.favoriteEndPoint}/${blogID}`, body)
+      .post(`${endPoints.favoriteEndPoint}/${blogID}`, {
+        favorite: {}
+      })
       .catch(err => {
         swal({
           type: "error",
@@ -92,4 +78,4 @@ const commentService = {
     });
   }
 };
-export default commentService;
+export default favoriteService;

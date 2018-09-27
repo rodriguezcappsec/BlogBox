@@ -54,7 +54,7 @@ export default class BlogsGrid extends Component {
                       </div>
                       <hr />
                       <div className="d-flex">
-                        {this.props.loged ? (
+                        {/* {this.props.loged ? (
                           <div className="mr-auto">
                             <button className="btn btn-icon btn-lg circle mr-1 bg-faded text-gray">
                               <i className="fa fa-thumbs-up" />
@@ -63,7 +63,7 @@ export default class BlogsGrid extends Component {
                           </div>
                         ) : (
                           ""
-                        )}
+                        )} */}
                         <div>
                           <button className="btn btn-icon btn-lg circle mr-1 bg-faded text-gray">
                             <i className="fa fa-comments" />
@@ -72,7 +72,11 @@ export default class BlogsGrid extends Component {
                         </div>
                         {this.props.loged ? (
                           <div className="ml-4">
-                            <button className="btn btn-icon btn-lg circle mr-1 bg-faded text-gray">
+                            <button
+                              name="saveBlog"
+                              onClick={() => this.props.saveBlog(blog._id)}
+                              className="btn btn-icon btn-lg circle mr-1 bg-faded text-gray"
+                            >
                               <i className="fa fa-plus" />
                             </button>
                           </div>

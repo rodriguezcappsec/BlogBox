@@ -15,6 +15,7 @@ import { TOKEN, DECODE_TOKEN } from "./utils/constants";
 import imageUpload from "./services/imageUpload";
 import MyProfile from "./components/Profile/MyProfile";
 import _ from "lodash";
+import favoriteServices from "./services/favoriteService";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -43,7 +44,8 @@ class App extends Component {
         likes: 0,
         article: "",
         topic: ""
-      }
+      },
+      favorites: []
     };
     this.getFormFields = getFormFields.bind(this);
   }
@@ -63,12 +65,24 @@ class App extends Component {
       this.setState({ blogs: blogs });
     });
   };
+  //
+  favorites = () => {
+    favoriteServices.find().then(record => {
+      this.setState({ favorites: record[0].savedBlogs });
+    });
+  };
+  saveToFavorites = blogID => {
+    favoriteServices.create(blogID).then(record => {
+      this.favorites();
+    });
+  };
 
   //Determines if the user is authenticated
   onSignedUp = () => {
     if (TOKEN()) {
       this.setState({ user: DECODE_TOKEN() });
       this.setState({ loged: true });
+      this.favorites();
     }
   };
 
@@ -192,6 +206,7 @@ class App extends Component {
                   loged={this.state.loged}
                   key={props.match.params.pageid}
                   refetch={this.blogs}
+                  saveBlog={this.saveToFavorites}
                 />
               )}
             />
@@ -204,6 +219,7 @@ class App extends Component {
                     {...props}
                     user={this.state.user}
                     key={props.match.params.pageid}
+                    favorites={this.state.favorites}
                   />
                 )}
               />
