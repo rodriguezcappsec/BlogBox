@@ -6,7 +6,7 @@ import swal from "sweetalert2";
 import getField from "../../utils/getFormField";
 import imageUpload from "../../services/imageUpload";
 import EditBlogModal from "../Modal/EditBlogModal";
-
+import { Link } from "react-router-dom";
 export default class MyProfile extends Component {
   constructor(props) {
     super(props);
@@ -82,26 +82,34 @@ export default class MyProfile extends Component {
   };
   renderMyFavorites = () => {
     return this.props.favorites.map((b, index) => {
-      return <div className="col-lg-3 col-sm-6" key={index}>
+      return (
+        <div className="col-lg-3 col-sm-6" key={index}>
           <div className="card">
             <header className="card-header">
               <h6 className="card-heading">{++index}</h6>
             </header>
             <div className="card-body d-flex px-3">
               <div className="mr-auto text-primary">
-                <h5>
-                  <span data-plugin="counterUp">{b.title}</span>
-                </h5>
+                <Link to={`/blog/${b._id}`}>
+                  <h5>
+                    <span data-plugin="counterUp">{b.title}</span>
+                  </h5>
+                </Link>
                 <span>{b.userID.userName}</span>
               </div>
               <div>
-                <a href="" onClick={e => this.props.onRemoveFavorite(e, b._id)} className="btn btn-sm btn-danger">
+                <a
+                  href=""
+                  onClick={e => this.props.onRemoveFavorite(e, b._id)}
+                  className="btn btn-sm btn-danger"
+                >
                   Remove
                 </a>
               </div>
             </div>
           </div>
-        </div>;
+        </div>
+      );
     });
   };
   renderMyBlogList = () => {
@@ -113,9 +121,11 @@ export default class MyProfile extends Component {
           </header>
           <div className="card-body d-flex px-3">
             <div className="mr-auto text-primary">
-              <h5>
-                <span data-plugin="counterUp">{b.title}</span>
-              </h5>
+              <Link to={`/blog/${b._id}`}>
+                <h5>
+                  <span data-plugin="counterUp">{b.title}</span>
+                </h5>
+              </Link>
               <span>{b.date}</span>
             </div>
             <div className="row">
