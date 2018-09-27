@@ -2,33 +2,21 @@ import swal from "sweetalert2";
 import verbs from "../utils/verbs";
 import endPoints from "./endPoints";
 
-const commentService = {
-  find: async id => {
-    let favoriteID = id === undefined ? "" : id;
+const favoriteService = {
+  find: async () => {
     let helper = await verbs
-      .get(endPoints.favoriteEndPoint, favoriteID)
-      .catch(err => {
-        swal({
-          type: "error",
-          title: "could not get saved blogs",
-          toast: true,
-          position: "top-end",
-          showConfirmButton: false,
-          timer: 3000
-        });
-      });
+      .get(endPoints.favoriteEndPoint, "")
+      .catch(err => {});
     if (helper) {
-      if (id === undefined) {
-        return helper.data.favorites;
-      } else {
-        return helper.data.favorite;
-      }
+      return helper.data.favorites;
     }
   },
   //leave favorite={} empty, it will construct what it needs in the backend
-  create: async (blogID, body = { favorite: {} }) => {
+  create: async blogID => {
     let helper = await verbs
-      .post(`${endPoints.favoriteEndPoint}/${blogID}`, body)
+      .post(`${endPoints.favoriteEndPoint}/${blogID}`, {
+        favorite: {}
+      })
       .catch(err => {
         swal({
           type: "error",
@@ -53,43 +41,31 @@ const commentService = {
     }
   },
   //Pass in the id of the blog to be removed
-  delete: blogID => {
-    swal({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      type: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
-    }).then(async result => {
-      if (result.value) {
-        let helper = await verbs
-          .update(`${endPoints.favoriteEndPoint}`, `${blogID}`, {})
-          .catch(() => {
-            swal({
-              type: "error",
-              title: "could not remove blog from favorites",
-              toast: true,
-              position: "top-end",
-              showConfirmButton: false,
-              timer: 3000
-            });
-            return;
-          });
-        if (helper) {
-          swal({
-            type: "success",
-            title: "Blog removed from favorites!",
-            toast: true,
-            position: "top-left",
-            showConfirmButton: false,
-            timer: 3000
-          });
-        }
+  remove: async blogID => {
+    let helper = await verbs
+      .update(`${endPoints.favoriteEndPoint}`, `${blogID}`, {})
+      .catch(() => {
+        swal({
+          type: "error",
+          title: "could not remove blog from favorites",
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000
+        });
         return;
-      }
-    });
+      });
+    if (helper) {
+      swal({
+        type: "success",
+        title: "Blog removed from favorites!",
+        toast: true,
+        position: "top-left",
+        showConfirmButton: false,
+        timer: 3000
+      });
+      return;
+    }
   }
 };
-export default commentService;
+export default favoriteService;

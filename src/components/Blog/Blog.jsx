@@ -24,10 +24,7 @@ export default class Blog extends Component {
     blogService.find(this.state.blogID).then(blog => {
       this.setState({ blog: blog });
       this.setState({ user: blog.userID });
-      this.setState({ comments: blog.comments }, () => {
-        console.log(this.state.comments);
-        
-      });
+      this.setState({ comments: blog.comments });
     });
   };
   openCommentField = () => {

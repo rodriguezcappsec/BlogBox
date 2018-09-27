@@ -6,6 +6,7 @@ import swal from "sweetalert2";
 import getField from "../../utils/getFormField";
 import imageUpload from "../../services/imageUpload";
 import EditBlogModal from "../Modal/EditBlogModal";
+
 export default class MyProfile extends Component {
   constructor(props) {
     super(props);
@@ -16,10 +17,12 @@ export default class MyProfile extends Component {
         image: "",
         article: "",
         topic: ""
-      }
+      },
+      favorites: this.props.favorites
     };
     this.getField = getField.bind(this);
   }
+
   myBlogs = () => {
     blogService.find().then(record => {
       const filterBlogs = record.filter(
@@ -77,7 +80,30 @@ export default class MyProfile extends Component {
       })
       .catch(err => console.error(err));
   };
-
+  renderMyFavorites = () => {
+    return this.props.favorites.map((b, index) => {
+      return <div className="col-lg-3 col-sm-6" key={index}>
+          <div className="card">
+            <header className="card-header">
+              <h6 className="card-heading">{++index}</h6>
+            </header>
+            <div className="card-body d-flex px-3">
+              <div className="mr-auto text-primary">
+                <h5>
+                  <span data-plugin="counterUp">{b.title}</span>
+                </h5>
+                <span>{b.userID.userName}</span>
+              </div>
+              <div>
+                <a href="" onClick={e => this.props.onRemoveFavorite(e, b._id)} className="btn btn-sm btn-danger">
+                  Remove
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>;
+    });
+  };
   renderMyBlogList = () => {
     return this.state.myBlogs.map((b, index) => {
       return (
@@ -206,7 +232,7 @@ export default class MyProfile extends Component {
               {/* Tab panes */}
               <div className="tab-content profile-tabs-content">
                 <div
-                  className="tab-pane active"
+                  className="tab-pane active "
                   id="My-blogs"
                   style={{ overflowY: "scroll", height: "300px" }}
                   role="tabpanel"
@@ -219,245 +245,14 @@ export default class MyProfile extends Component {
                             </div> */}
                   {this.renderMyBlogList()}
                 </div>
-                {/* /#profile-overview */}
                 <div
                   className="tab-pane"
                   id="My-favorite-blogs"
+                  style={{ overflowY: "scroll", height: "300px" }}
                   role="tabpanel"
                 >
-                  <div className="edit-cover mb-4">
-                    <img
-                      className="img-fluid"
-                      src="../assets/global/images/profile-cover-2.jpg"
-                      alt=""
-                    />
-                    <button className="btn btn-sm btn-success px-4">
-                      Edit
-                    </button>
-                  </div>
-                  {/* /.edit-cover */}
-                  <div className="row">
-                    <div className="col-xl-2 col-md-3">
-                      <div className="d-flex flex-wrap align-content-start justify-content-between">
-                        <div>
-                          <a href="">
-                            <img
-                              src="../assets/global/images/profile-avatar-2.jpg"
-                              alt=""
-                              className="img-thumbnail mb-3"
-                            />
-                          </a>
-                          <div>
-                            <button className="btn btn-primary btn-sm px-3 mr-2">
-                              Edit
-                            </button>{" "}
-                            <button className="btn btn-success btn-sm">
-                              X
-                            </button>
-                          </div>
-                        </div>
-                        <div className="mt-5">
-                          <div className="mb-3">
-                            <strong>Your Gender:</strong>
-                          </div>
-                          <label className="d-block custom-control custom-radio">
-                            <input
-                              id="radio1"
-                              name="radio"
-                              className="custom-control-input"
-                              type="radio"
-                            />{" "}
-                            <span className="custom-control-indicator" />
-                            <span className="custom-control-description">
-                              Male
-                            </span>
-                          </label>
-                          <label className="d-block custom-control custom-radio">
-                            <input
-                              id="radio2"
-                              name="radio"
-                              defaultChecked="checked"
-                              className="custom-control-input"
-                              type="radio"
-                            />{" "}
-                            <span className="custom-control-indicator" />{" "}
-                            <span className="custom-control-description">
-                              Female
-                            </span>
-                          </label>
-                        </div>
-                      </div>
-                      {/* /.d-flex */}
-                    </div>
-                    {/* /.col- */}
-                    <div className="col-xl-10 col-md-9">
-                      <form action="#">
-                        <h5 className="my-4">Basic Information</h5>
-                        <div className="row">
-                          <div className="col-md-6">
-                            <div className="form-group">
-                              <label htmlFor="edit__name">YOUR NAME</label>
-                              <input
-                                id="edit__name"
-                                className="form-control"
-                                defaultValue="DWIGHT GULLY"
-                                type="text"
-                              />
-                            </div>
-                          </div>
-                          {/* /.col- */}
-                          <div className="col-md-6">
-                            <div className="form-group">
-                              <label htmlFor="edit__password">
-                                YOUR PASSWORD
-                              </label>
-                              <input
-                                id="edit__password"
-                                className="form-control"
-                                defaultValue="fake-password"
-                                type="password"
-                              />
-                            </div>
-                          </div>
-                          {/* /.col- */}
-                          <div className="col-md-12">
-                            <label htmlFor="edit__bio">WHO AM I</label>
-                            <textarea
-                              name="edit__bio"
-                              id="edit__bio"
-                              className="form-control"
-                              rows={6}
-                              defaultValue={
-                                "vichyssoise aetheogamous care callosal prothetically Iberism stratospherical eozoon gentianose spermotoxin bibitory pterotheca unportraited trimodal benzol"
-                              }
-                            />
-                          </div>
-                        </div>
-                        {/* /.row */}
-                        <h5 className="my-4 profile-edit-section-heading">
-                          Contact Information
-                        </h5>
-                        <div className="row">
-                          <div className="col-md-6">
-                            <div className="form-group">
-                              <label htmlFor="edit__email">EMAIL</label>
-                              <input
-                                id="edit__email"
-                                className="form-control"
-                                defaultValue="someone@example.com"
-                                type="email"
-                              />
-                            </div>
-                          </div>
-                          {/* /.col- */}
-                          <div className="col-md-6">
-                            <div className="form-group">
-                              <label htmlFor="edit__website">WEBSITE</label>
-                              <input
-                                id="edit__website"
-                                className="form-control"
-                                defaultValue="http://www.example.com"
-                                type="url"
-                              />
-                            </div>
-                          </div>
-                          {/* /.col- */}
-                          <div className="col-md-6">
-                            <div className="form-group">
-                              <label htmlFor="edit__phone">PHONE</label>
-                              <input
-                                id="edit__phone"
-                                className="form-control"
-                                defaultValue="000-5421-524"
-                                type="text"
-                              />
-                            </div>
-                          </div>
-                          {/* /.col- */}
-                          <div className="col-md-6">
-                            <div className="form-group">
-                              <label htmlFor="edit__skype">SKYPE</label>
-                              <input
-                                id="edit__skype"
-                                className="form-control"
-                                defaultValue="myskype"
-                                type="text"
-                              />
-                            </div>
-                          </div>
-                          {/* /.col- */}
-                        </div>
-                        {/* /.row */}
-                        <h5 className="my-4 profile-edit-section-heading">
-                          General Information
-                        </h5>
-                        <div className="row">
-                          <div className="col-md-6">
-                            <div className="form-group">
-                              <label htmlFor="edit__job">JOB</label>
-                              <input
-                                id="edit__job"
-                                className="form-control"
-                                defaultValue="Web Developer"
-                                type="text"
-                              />
-                            </div>
-                          </div>
-                          {/* /.col- */}
-                          <div className="col-md-6">
-                            <div className="form-group">
-                              <label htmlFor="edit__position">POSITION</label>
-                              <input
-                                id="edit__position"
-                                className="form-control"
-                                defaultValue="Team Manager"
-                                type="text"
-                              />
-                            </div>
-                          </div>
-                          {/* /.col- */}
-                          <div className="col-md-6">
-                            <div className="form-group">
-                              <label htmlFor="edit__major">STUDIED</label>
-                              <input
-                                id="edit__major"
-                                className="form-control"
-                                defaultValue="computer science"
-                                type="text"
-                              />
-                            </div>
-                          </div>
-                          {/* /.col- */}
-                          <div className="col-md-6">
-                            <div className="form-group">
-                              <label htmlFor="edit__school">HIGH SCHOOL</label>
-                              <input
-                                id="edit__school"
-                                className="form-control"
-                                defaultValue="Fake High school"
-                                type="text"
-                              />
-                            </div>
-                          </div>
-                          {/* /.col- */}
-                        </div>
-                        {/* /.row */}
-                        <div className="row">
-                          <div className="col-md-12">
-                            <button className="btn btn-block btn-success mt-5">
-                              Save
-                            </button>
-                          </div>
-                          {/* /.col- */}
-                        </div>
-                        {/* /.row */}
-                      </form>
-                    </div>
-                    {/* /.col- */}
-                  </div>
-                  {/* /.row */}
+                  <div className="row">{this.renderMyFavorites()}</div>
                 </div>
-                {/* /#profile-settings */}
               </div>
               {/* /.tab-content */}
             </div>

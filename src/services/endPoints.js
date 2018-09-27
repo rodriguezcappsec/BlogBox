@@ -2,7 +2,7 @@
 let apiUrl = "";
 window.location.hostname === "localhost"
   ? (apiUrl = "http://localhost:4741")
-  : (apiUrl = "BACKEND DEPLOYMENT END POINT HERE");
+  : (apiUrl = "https://fast-wildwood-40490.herokuapp.com");
 
 //user api urls
 let authUrls = {
