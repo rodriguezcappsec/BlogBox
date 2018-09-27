@@ -16,6 +16,8 @@ import imageUpload from "./services/imageUpload";
 import MyProfile from "./components/Profile/MyProfile";
 import _ from "lodash";
 import favoriteServices from "./services/favoriteService";
+import swal from "sweetalert2";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -74,6 +76,24 @@ class App extends Component {
   saveToFavorites = blogID => {
     favoriteServices.create(blogID).then(record => {
       this.favorites();
+    });
+  };
+
+  onRemoveFavorite = (e, blogID) => {
+    e.preventDefault();
+    swal({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then(async result => {
+      if (result.value) {
+        favoriteServices.remove(blogID);
+        this.favorites();
+      }
     });
   };
 
@@ -220,6 +240,7 @@ class App extends Component {
                     user={this.state.user}
                     key={props.match.params.pageid}
                     favorites={this.state.favorites}
+                    onRemoveFavorite={this.onRemoveFavorite}
                   />
                 )}
               />

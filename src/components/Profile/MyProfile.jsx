@@ -7,7 +7,6 @@ import getField from "../../utils/getFormField";
 import imageUpload from "../../services/imageUpload";
 import EditBlogModal from "../Modal/EditBlogModal";
 
-
 export default class MyProfile extends Component {
   constructor(props) {
     super(props);
@@ -83,8 +82,7 @@ export default class MyProfile extends Component {
   };
   renderMyFavorites = () => {
     return this.props.favorites.map((b, index) => {
-      return (
-        <div className="col-lg-3 col-sm-6" key={index}>
+      return <div className="col-lg-3 col-sm-6" key={index}>
           <div className="card">
             <header className="card-header">
               <h6 className="card-heading">{++index}</h6>
@@ -97,14 +95,13 @@ export default class MyProfile extends Component {
                 <span>{b.userID.userName}</span>
               </div>
               <div>
-                <a href="" className="btn btn-sm btn-danger">
+                <a href="" onClick={e => this.props.onRemoveFavorite(e, b._id)} className="btn btn-sm btn-danger">
                   Remove
                 </a>
               </div>
             </div>
           </div>
-        </div>
-      );
+        </div>;
     });
   };
   renderMyBlogList = () => {

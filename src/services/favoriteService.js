@@ -4,7 +4,9 @@ import endPoints from "./endPoints";
 
 const favoriteService = {
   find: async () => {
-    let helper = await verbs.get(endPoints.favoriteEndPoint,"").catch(err => {});
+    let helper = await verbs
+      .get(endPoints.favoriteEndPoint, "")
+      .catch(err => {});
     if (helper) {
       return helper.data.favorites;
     }
@@ -39,43 +41,31 @@ const favoriteService = {
     }
   },
   //Pass in the id of the blog to be removed
-  delete: blogID => {
-    swal({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      type: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
-    }).then(async result => {
-      if (result.value) {
-        let helper = await verbs
-          .update(`${endPoints.favoriteEndPoint}`, `${blogID}`, {})
-          .catch(() => {
-            swal({
-              type: "error",
-              title: "could not remove blog from favorites",
-              toast: true,
-              position: "top-end",
-              showConfirmButton: false,
-              timer: 3000
-            });
-            return;
-          });
-        if (helper) {
-          swal({
-            type: "success",
-            title: "Blog removed from favorites!",
-            toast: true,
-            position: "top-left",
-            showConfirmButton: false,
-            timer: 3000
-          });
-        }
+  remove: async blogID => {
+    let helper = await verbs
+      .update(`${endPoints.favoriteEndPoint}`, `${blogID}`, {})
+      .catch(() => {
+        swal({
+          type: "error",
+          title: "could not remove blog from favorites",
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000
+        });
         return;
-      }
-    });
+      });
+    if (helper) {
+      swal({
+        type: "success",
+        title: "Blog removed from favorites!",
+        toast: true,
+        position: "top-left",
+        showConfirmButton: false,
+        timer: 3000
+      });
+      return;
+    }
   }
 };
 export default favoriteService;
