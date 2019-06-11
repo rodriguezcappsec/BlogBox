@@ -1,8 +1,5 @@
 //condition to set the api url
-let apiUrl = "";
-window.location.hostname === "localhost"
-  ? (apiUrl = "http://localhost:4741")
-  : (apiUrl = "https://fast-wildwood-40490.herokuapp.com");
+let apiUrl = window.location.hostname === "localhost" ? "http://localhost:4741" : "https://fast-wildwood-40490.herokuapp.com"
 
 //user api urls
 let authUrls = {
